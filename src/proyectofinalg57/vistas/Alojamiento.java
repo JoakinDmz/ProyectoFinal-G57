@@ -11,7 +11,9 @@ import javax.swing.table.DefaultTableModel;
 public class Alojamiento extends javax.swing.JPanel {
 
     private List<Ciudad> listaC;
+    private List<Alojamiento> listaA;
     private CiudadData cData;
+    private AlojamientoData aData;
     private DefaultTableModel modelo;
     private AlojamientoData alojData;
     
@@ -19,6 +21,7 @@ public class Alojamiento extends javax.swing.JPanel {
         initComponents();
         cData = new CiudadData();
         listaC = cData.listarCiudad();
+        
         modelo = new DefaultTableModel();
         alojData = new AlojamientoData();
         armarCabeceraTabla();
@@ -249,6 +252,12 @@ public class Alojamiento extends javax.swing.JPanel {
     }
     private void cargarDatos(){
         Ciudad selec = (Ciudad) cboxCiudades2.getSelectedItem();
-        listaC = (ArrayList) alojData.buscarAlojamientos(selec.getIdCiudad());//crear metodo en alojamientodata
+        listaA= (List<Alojamiento>) alojData.buscarAlojamiento(selec.getIdCiudad());
+        //List <Alojamiento> listaC= (ArrayList) alojData.buscarAlojamiento(selec.getIdCiudad());
+        //listaC = (ArrayList) alojData.buscarAlojamiento(selec.getIdCiudad());//crear metodo en alojamientodata
+        for (Alojamiento a:listaA){
+            
+            modelo.addRow(new Object[]{a.,});
+        }
     }
 }

@@ -119,5 +119,34 @@ public class AlojamientoData {
         }
     
     }
+    public Alojamiento buscarAlojamiento(int ciudadDest) {
+
+        String sql = "SELECT tipo, servicio, importeDiario FROM alojamiento WHERE ciudadDest= ? AND estado = 1";
+        Alojamiento alojamiento = null;
+        try {
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setInt(1,ciudadDest);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                alojamiento = new Alojamiento();
+                alojamiento.setIdAlojamiento(ciudadDest);
+
+                alojamiento.setTipo(rs.getString("tipo"));
+                alojamiento.setServicio(rs.getString("servicio"));
+                alojamiento.setImporteDiario(rs.getDouble("importeDiario"));
+                alojamiento.setEstado(true);
+
+            } else {
+                JOptionPane.showMessageDialog(null, "No existente");
+
+            }
+
+            ps.close();
+
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "No se econtró alojamiento");
+        }
+        return alojamiento;
+    }
     
 }
