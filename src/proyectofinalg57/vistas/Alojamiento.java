@@ -257,7 +257,7 @@ public class Alojamiento extends javax.swing.JPanel {
         //listaC = (ArrayList) alojData.buscarAlojamiento(selec.getIdCiudad());//crear metodo en alojamientodata
         for (Alojamiento a:listaA){
             
-            modelo.addRow(new Object[]{a.,});
+            modelo.addRow(new Object[]{a,});//no toma el getTipo de Alojamiento
         }
     }
 }
