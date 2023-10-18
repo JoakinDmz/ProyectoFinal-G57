@@ -257,7 +257,7 @@ public class Menu extends javax.swing.JFrame {
 
     private void jbAlojamientoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbAlojamientoActionPerformed
         // TODO add your handling code here:
-        Alojamiento alojamiento = new Alojamiento();
+        Alojamientos alojamiento = new Alojamientos();
         alojamiento.setSize(390, 540);
         alojamiento.setLocation(0,0);
         

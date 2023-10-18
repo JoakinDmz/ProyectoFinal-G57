@@ -3,27 +3,29 @@ package proyectofinalg57.vistas;
 import finalgrupo57.AccesoADatos.AlojamientoData;
 import finalgrupo57.AccesoADatos.CiudadData;
 import finalgrupo57.Entidades.Ciudad;
+import finalgrupo57.Entidades.Alojamiento;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
 
 
-public class Alojamiento extends javax.swing.JPanel {
+public class Alojamientos extends javax.swing.JPanel {
 
     private List<Ciudad> listaC;
     private List<Alojamiento> listaA;
     private CiudadData cData;
     private AlojamientoData aData;
     private DefaultTableModel modelo;
-    private AlojamientoData alojData;
     
-    public Alojamiento() {
+    
+    public Alojamientos() {
         initComponents();
         cData = new CiudadData();
         listaC = cData.listarCiudad();
         
         modelo = new DefaultTableModel();
-        alojData = new AlojamientoData();
+        aData = new AlojamientoData();
+        listaA= aData.listarAlojamientos();
         armarCabeceraTabla();
         cargarCiudad();
         
@@ -212,6 +214,7 @@ public class Alojamiento extends javax.swing.JPanel {
 
     private void cboxCiudades2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboxCiudades2ActionPerformed
         // TODO add your handling code here:
+        cargarAlojamientos();
     }//GEN-LAST:event_cboxCiudades2ActionPerformed
 
 
@@ -250,14 +253,59 @@ public class Alojamiento extends javax.swing.JPanel {
         }
         jtTablaHospedajes.setModel(modelo);
     }
-    private void cargarDatos(){
-        Ciudad selec = (Ciudad) cboxCiudades2.getSelectedItem();
-        listaA= (List<Alojamiento>) alojData.buscarAlojamiento(selec.getIdCiudad());
-        //List <Alojamiento> listaC= (ArrayList) alojData.buscarAlojamiento(selec.getIdCiudad());
-        //listaC = (ArrayList) alojData.buscarAlojamiento(selec.getIdCiudad());//crear metodo en alojamientodata
-        for (Alojamiento a:listaA){
-            
-            modelo.addRow(new Object[]{a,});//no toma el getTipo de Alojamiento
+//    private void cargarAlojamientos(){
+//        Ciudad selec = (Ciudad) cboxCiudades2.getSelectedItem();
+//        listaA= (List<Alojamiento>) aData.buscarAlojamiento(selec.getIdCiudad());
+//        //List <Alojamiento> listaC= (ArrayList) alojData.buscarAlojamiento(selec.getIdCiudad());
+//        //listaC = (ArrayList) alojData.buscarAlojamiento(selec.getIdCiudad());//crear metodo en alojamientodata
+//        DefaultTableModel modelo = (DefaultTableModel) jtTablaHospedajes.getModel();
+//        
+//        for (Alojamiento a:listaA){
+//            
+//            String tipo=a.getTipo();
+//            String servicio= a.getServicio();
+//            double precio= a.getImporteDiario();
+//            modelo.addRow(new Object[]{tipo, servicio, precio});//definir String tipo=a.getTipo() y demas para evitar posible error luego
+//        }
+//    }
+    //CARGA TODOS LOS ALOJAMIENTOS
+//    private void cargarAlojamientos() {
+//    DefaultTableModel modelo = (DefaultTableModel) jtTablaHospedajes.getModel();
+//    modelo.setRowCount(0); // Limpia la tabla antes de agregar nuevos datos
+//    
+//    List<Alojamiento> alojamientos = aData.listarAlojamientos(); // Obtén la lista de todos los alojamientos disponibles
+//    
+//    for (Alojamiento a : alojamientos) {
+//        // Accede a los atributos de Alojamiento y agrega una fila a la tabla
+//        String tipo = a.getTipo();
+//        String servicio = a.getServicio();
+//        double precio = a.getImporteDiario();
+//        modelo.addRow(new Object[]{tipo, servicio, precio});
+//    }
+//    }
+    private void cargarAlojamientos() {
+    DefaultTableModel modelo = (DefaultTableModel) jtTablaHospedajes.getModel();
+    modelo.setRowCount(0); // Limpia la tabla antes de agregar nuevos datos
+
+    Ciudad selec = (Ciudad) cboxCiudades2.getSelectedItem();
+    int ciudadId = selec.getIdCiudad(); // guardo el ID de la ciudad marcada en el cbox
+
+    List<Alojamiento> alojamientos = aData.listarAlojamientos();// lista de todos los alojamientos
+
+    // filtro los alojamientos segun el ID de la ciudad del cbox
+    List<Alojamiento> alojamientosPorID = new ArrayList<>();
+    for (Alojamiento a : alojamientos) {
+        if (a.getCiudadDest().getIdCiudad() == ciudadId) {
+            alojamientosPorID.add(a);
         }
     }
+
+    // cargo la tabla con los alojamientos que se filtro
+    for (Alojamiento a : alojamientosPorID) {
+        String tipo = a.getTipo();
+        String servicio = a.getServicio();
+        double precio = a.getImporteDiario();
+        modelo.addRow(new Object[]{tipo, servicio, precio});
+    }
+}
 }

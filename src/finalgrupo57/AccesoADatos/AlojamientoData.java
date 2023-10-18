@@ -137,7 +137,7 @@ public class AlojamientoData {
                 alojamiento.setEstado(true);
 
             } else {
-                JOptionPane.showMessageDialog(null, "No existente");
+                JOptionPane.showMessageDialog(null, "No existente el alojamiento");
 
             }
 
