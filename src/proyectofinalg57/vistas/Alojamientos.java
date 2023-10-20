@@ -283,7 +283,7 @@ public class Alojamientos extends javax.swing.JPanel {
 //        modelo.addRow(new Object[]{tipo, servicio, precio});
 //    }
 //    }
-    private void cargarAlojamientos() {
+    private void cargarAlojamientos() {//MUESTRA CARTEL DE NO SE ENCONTRO CIUDAD PERO SI PASA POR TABLA LOS HOSP
     DefaultTableModel modelo = (DefaultTableModel) jtTablaHospedajes.getModel();
     modelo.setRowCount(0); // Limpia la tabla antes de agregar nuevos datos
 
