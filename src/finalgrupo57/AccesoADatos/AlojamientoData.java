@@ -119,34 +119,68 @@ public class AlojamientoData {
         }
     
     }
-    public Alojamiento buscarAlojamiento(int ciudadDest) {
-
-        String sql = "SELECT tipo, servicio, importeDiario FROM alojamiento WHERE ciudadDest= ? AND estado = 1";
-        Alojamiento alojamiento = null;
+//    public Alojamiento buscarAlojamiento(int ciudadDest) {
+//
+//        String sql = "SELECT tipo, servicio, importeDiario FROM alojamiento WHERE ciudadDest= ? AND estado = 1";
+//        Alojamiento alojamiento = null;
+//        try {
+//            PreparedStatement ps = con.prepareStatement(sql);
+//            ps.setInt(1,ciudadDest);
+//            ResultSet rs = ps.executeQuery();
+//            if (rs.next()) {
+//                alojamiento = new Alojamiento();
+//                alojamiento.setIdAlojamiento(ciudadDest);
+//
+//                alojamiento.setTipo(rs.getString("tipo"));
+//                alojamiento.setServicio(rs.getString("servicio"));
+//                alojamiento.setImporteDiario(rs.getDouble("importeDiario"));
+//                alojamiento.setEstado(true);
+//
+//            } else {
+//                JOptionPane.showMessageDialog(null, "No existente el alojamiento");
+//
+//            }
+//
+//            ps.close();
+//
+//        } catch (SQLException ex) {
+//            JOptionPane.showMessageDialog(null, "No se econtró alojamiento");
+//        }
+//        return alojamiento;
+//    }
+    public Alojamiento buscarAlojamiento(int id){
+       Alojamiento alojamiento=new Alojamiento();
+       CiudadData cd = new CiudadData();
+    String sql = "SELECT fechaIn, fechaOn, servicio, tipo, importeDiario, ciudadDest, estado FROM alojamiento WHERE idAlojamiento=?";
+    
         try {
             PreparedStatement ps = con.prepareStatement(sql);
-            ps.setInt(1,ciudadDest);
+            ps.setInt(1, id);
+            
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {
-                alojamiento = new Alojamiento();
-                alojamiento.setIdAlojamiento(ciudadDest);
-
-                alojamiento.setTipo(rs.getString("tipo"));
+                alojamiento.setIdAlojamiento(id);
+                alojamiento.setFechaIn(rs.getDate("fechaIn").toLocalDate());
+                alojamiento.setFechaOn(rs.getDate("fechaOn").toLocalDate());
                 alojamiento.setServicio(rs.getString("servicio"));
+                alojamiento.setTipo(rs.getString("tipo"));
                 alojamiento.setImporteDiario(rs.getDouble("importeDiario"));
-                alojamiento.setEstado(true);
-
-            } else {
-                JOptionPane.showMessageDialog(null, "No existente el alojamiento");
-
+                alojamiento.setCiudadDest(cd.buscarCiudad(rs.getInt("ciudadDest")));
+                alojamiento.setEstado(rs.getBoolean("estado"));
+            }else{
+            JOptionPane.showMessageDialog(null, "No se encontro alojamiento");
+            
             }
-
             ps.close();
-
+            
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "No se econtró alojamiento");
+            JOptionPane.showMessageDialog(null,"Error al buscar alojamiento"+ ex.getMessage());
         }
-        return alojamiento;
+    
+    
+       return alojamiento;
+    
+    
     }
     
 }
