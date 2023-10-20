@@ -76,7 +76,7 @@ public class Pasaje {
 
     @Override
     public String toString() {
-        return tipoTransporte ;
+        return tipoTransporte +", $"+ importe ;
     }
     
 }

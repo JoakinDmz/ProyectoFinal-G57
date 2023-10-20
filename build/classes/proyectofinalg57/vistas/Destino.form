@@ -65,21 +65,21 @@
                           <EmptySpace max="-2" attributes="0"/>
                       </Group>
                       <Group type="102" attributes="0">
-                          <Group type="103" groupAlignment="1" attributes="0">
-                              <Component id="cboxTransporte" alignment="0" pref="200" max="32767" attributes="0"/>
-                              <Component id="cboxCiudades" alignment="0" pref="200" max="32767" attributes="0"/>
-                              <Component id="jTextField1" alignment="0" pref="200" max="32767" attributes="0"/>
-                              <Component id="jtCantidadPasajeros" alignment="0" max="32767" attributes="0"/>
-                          </Group>
-                          <EmptySpace min="-2" pref="34" max="-2" attributes="0"/>
-                      </Group>
-                      <Group type="102" attributes="0">
                           <Group type="103" groupAlignment="0" max="-2" attributes="0">
                               <Component id="jTextField2" min="-2" pref="152" max="-2" attributes="0"/>
                               <Component id="jDateChooser2" alignment="0" pref="210" max="32767" attributes="0"/>
                               <Component id="jDateChooser1" alignment="0" max="32767" attributes="0"/>
                           </Group>
                           <EmptySpace max="32767" attributes="0"/>
+                      </Group>
+                      <Group type="102" alignment="1" attributes="0">
+                          <Group type="103" groupAlignment="1" attributes="0">
+                              <Component id="cboxCiudadOrigen" alignment="0" max="32767" attributes="0"/>
+                              <Component id="cboxTransporte" alignment="0" pref="200" max="32767" attributes="0"/>
+                              <Component id="cboxCiudades" alignment="0" pref="200" max="32767" attributes="0"/>
+                              <Component id="jtCantidadPasajeros" alignment="0" max="32767" attributes="0"/>
+                          </Group>
+                          <EmptySpace min="-2" pref="34" max="-2" attributes="0"/>
                       </Group>
                   </Group>
               </Group>
@@ -88,8 +88,8 @@
         <DimensionLayout dim="1">
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" attributes="0">
-                  <EmptySpace min="27" pref="27" max="-2" attributes="0"/>
-                  <Component id="jTextField1" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="25" max="-2" attributes="0"/>
+                  <Component id="cboxCiudadOrigen" min="-2" max="-2" attributes="0"/>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Component id="cboxCiudades" min="-2" max="-2" attributes="0"/>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
@@ -100,9 +100,9 @@
                   <Component id="jDateChooser1" min="-2" max="-2" attributes="0"/>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Component id="jDateChooser2" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="32" max="-2" attributes="0"/>
                   <Component id="jTextField2" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace min="-2" pref="130" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="110" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jbSalir" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="jbGuardar" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -114,14 +114,6 @@
         </DimensionLayout>
       </Layout>
       <SubComponents>
-        <Component class="javax.swing.JTextField" name="jTextField1">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="Ciudad, Provincia-Pais"/>
-          </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jTextField1ActionPerformed"/>
-          </Events>
-        </Component>
         <Component class="javax.swing.JComboBox" name="cboxCiudades">
           <Properties>
             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
@@ -315,6 +307,16 @@
         <Component class="com.toedter.calendar.JDateChooser" name="jDateChooser1">
         </Component>
         <Component class="com.toedter.calendar.JDateChooser" name="jDateChooser2">
+        </Component>
+        <Component class="javax.swing.JComboBox" name="cboxCiudadOrigen">
+          <Properties>
+            <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+              <StringArray count="0"/>
+            </Property>
+          </Properties>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;Ciudad&gt;"/>
+          </AuxValues>
         </Component>
       </SubComponents>
     </Container>

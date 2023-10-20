@@ -46,7 +46,7 @@ public class Menu extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         jbDestino = new javax.swing.JButton();
         jbAlojamiento = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        jbModAdmin = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
@@ -93,10 +93,10 @@ public class Menu extends javax.swing.JFrame {
             }
         });
 
-        jButton3.setText("Modo Administrador");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        jbModAdmin.setText("Modo Administrador");
+        jbModAdmin.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                jbModAdminActionPerformed(evt);
             }
         });
 
@@ -154,7 +154,7 @@ public class Menu extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jbLogin)
-                    .addComponent(jButton3))
+                    .addComponent(jbModAdmin))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
@@ -177,7 +177,7 @@ public class Menu extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 58, Short.MAX_VALUE)
                 .addComponent(jbLogin)
                 .addGap(12, 12, 12)
-                .addComponent(jButton3))
+                .addComponent(jbModAdmin))
         );
 
         jpVisualizador.setBackground(new java.awt.Color(255, 255, 255));
@@ -302,12 +302,21 @@ public class Menu extends javax.swing.JFrame {
 
     private void jbResumenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbResumenActionPerformed
         // TODO add your handling code here:
-        
+        ResumenVentas resumen = new ResumenVentas();
+        resumen.setVisible(true);
     }//GEN-LAST:event_jbResumenActionPerformed
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+    private void jbModAdminActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbModAdminActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton3ActionPerformed
+        PanelAdministrador paneladmin = new PanelAdministrador();
+        paneladmin.setSize(750,540);
+        paneladmin.setLocation(0,0);
+        
+        jpVisualizador3.removeAll();
+        jpVisualizador3.add(paneladmin,BorderLayout.CENTER);
+        jpVisualizador3.revalidate();
+        jpVisualizador3.repaint();
+    }//GEN-LAST:event_jbModAdminActionPerformed
 
     private void jbPaquetesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbPaquetesActionPerformed
         // TODO add your handling code here:
@@ -363,7 +372,6 @@ public class Menu extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -376,6 +384,7 @@ public class Menu extends javax.swing.JFrame {
     private javax.swing.JButton jbAlojamiento;
     private javax.swing.JButton jbDestino;
     private javax.swing.JButton jbLogin;
+    private javax.swing.JButton jbModAdmin;
     private javax.swing.JButton jbPaquetes;
     private javax.swing.JButton jbResumen;
     private javax.swing.JPanel jpVisualizador;

@@ -16,6 +16,7 @@ public class ResumenVentas extends javax.swing.JFrame {
      */
     public ResumenVentas() {
         initComponents();
+        this.setLocationRelativeTo(null);
     }
 
     /**

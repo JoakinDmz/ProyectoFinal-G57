@@ -117,8 +117,6 @@ public class Alojamientos extends javax.swing.JPanel {
         jLabel2.setForeground(new java.awt.Color(0, 0, 0));
         jLabel2.setText("Cantidad de Personas:");
 
-        jtCantidadPorHospedaje.setText("jTextField1");
-
         jLabel3.setForeground(new java.awt.Color(0, 0, 0));
         jLabel3.setText("Costo Total de Hospedaje:");
 
