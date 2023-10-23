@@ -32,13 +32,14 @@ public class CiudadData {
 
     public void guardarCiudad(Ciudad ciudad) {
 
-        String sql = "INSERT INTO ciudad(nombre, pais, estado,provincia) VALUES (?, ?, ?, ?)";
+        String sql = "INSERT INTO ciudad(nombre, pais, provincia, estado) VALUES (?, ?, ?, ?)";
         try {
             PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             ps.setString(1, ciudad.getNombre());
             ps.setString(2, ciudad.getPais());
-            ps.setBoolean(3, ciudad.isEstado());
-            ps.setString(4, ciudad.getProvincia());
+            ps.setString(3, ciudad.getProvincia());
+            ps.setBoolean(4, ciudad.isEstado());
+            
             ps.executeUpdate();
 
             ResultSet rs = ps.getGeneratedKeys();
@@ -57,15 +58,15 @@ public class CiudadData {
 
     public void modificarCiudad(Ciudad ciudad) {
 
-        String sql = "UPDATE ciudad SET nombre=?,pais=?,estado=?,provincia=?"
-                + "WHERE idCiudad =?";
+        String sql = "UPDATE ciudad SET nombre = ?,pais = ?,provincia = ?, estado = ? "
+                + "WHERE idCiudad =? ";
 
         try {
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setString(1, ciudad.getNombre());
             ps.setString(2, ciudad.getPais());
-            ps.setBoolean(3, ciudad.isEstado());
-            ps.setString(4, ciudad.getProvincia());
+            ps.setString(3, ciudad.getProvincia());
+            ps.setBoolean(4, ciudad.isEstado());
             ps.setInt(5, ciudad.getIdCiudad());
             int x = ps.executeUpdate();
 
@@ -104,7 +105,7 @@ public class CiudadData {
 
     public Ciudad buscarCiudad(int id) {
 
-        String sql = "SELECT nombre,pais,estado,provincia FROM ciudad WHERE idCiudad= ? AND estado = 1";
+        String sql = "SELECT nombre,pais,provincia,estado FROM ciudad WHERE idCiudad= ? AND estado = 1";
         Ciudad ciudad = new Ciudad();
         try {
             PreparedStatement ps = con.prepareStatement(sql);
@@ -139,7 +140,7 @@ public class CiudadData {
     
     public List<Ciudad> listarCiudad() {
 
-        String sql = "SELECT idCiudad,nombre,pais,estado,provincia FROM ciudad WHERE estado = 1";
+        String sql = "SELECT idCiudad,nombre,pais,provincia,estado FROM ciudad WHERE estado = 1";
         ArrayList<Ciudad> ciudades = new ArrayList<>();
         try {
             PreparedStatement ps = con.prepareStatement(sql);
@@ -149,8 +150,9 @@ public class CiudadData {
                 Ciudad ciudad = new Ciudad();
                 ciudad.setNombre(rs.getString("nombre"));
                 ciudad.setPais(rs.getString("pais"));
-                ciudad.setEstado(true);
+                
                 ciudad.setProvincia(rs.getString("provincia"));
+                ciudad.setEstado(true);
                 ciudad.setIdCiudad(rs.getInt("idCiudad"));
                 
                 ciudades.add(ciudad);
