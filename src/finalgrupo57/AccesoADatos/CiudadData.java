@@ -104,7 +104,7 @@ public class CiudadData {
 
     public Ciudad buscarCiudad(int id) {
 
-        String sql = "SELECT nombre,pais,estado,Provincia FROM ciudad WHERE idCiudad= ? AND estado = 1";
+        String sql = "SELECT nombre,pais,estado,provincia FROM ciudad WHERE idCiudad= ? AND estado = 1";
         Ciudad ciudad = new Ciudad();
         try {
             PreparedStatement ps = con.prepareStatement(sql);
