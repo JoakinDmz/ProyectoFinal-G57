@@ -114,7 +114,7 @@ public class CiudadData {
                 ciudad.setNombre(rs.getString("nombre"));
                 ciudad.setPais(rs.getString("pais"));
                 //ciudad.setEstado(true);
-                ciudad.setProvincia(rs.getString("Provincia"));
+                ciudad.setProvincia(rs.getString("provincia"));
                 ciudad.setEstado(rs.getBoolean("estado"));//SE COMENTO ciudad.setEstado(true) y agrego esta linea
                 ciudad.setIdCiudad(id);
 
