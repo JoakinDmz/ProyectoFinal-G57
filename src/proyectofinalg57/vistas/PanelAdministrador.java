@@ -188,7 +188,7 @@ public class PanelAdministrador extends javax.swing.JPanel {
 
         jTextField2.setText("Formato de Ingreso");
 
-        jTextField3.setText("Formato de Ingreso");
+        jTextField3.setText("Formato de Ingreso.");
 
         jTextField4.setText("Formato de Ingreso");
         jTextField4.addActionListener(new java.awt.event.ActionListener() {
