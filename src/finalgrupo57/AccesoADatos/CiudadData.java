@@ -32,7 +32,7 @@ public class CiudadData {
 
     public void guardarCiudad(Ciudad ciudad) {
 
-        String sql = "INSERT INTO ciudad(nombre, pais, estado,Provincia) VALUES (?, ?, ?, ?)";
+        String sql = "INSERT INTO ciudad(nombre, pais, estado,provincia) VALUES (?, ?, ?, ?)";
         try {
             PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             ps.setString(1, ciudad.getNombre());
@@ -57,7 +57,7 @@ public class CiudadData {
 
     public void modificarCiudad(Ciudad ciudad) {
 
-        String sql = "UPDATE ciudad SET nombre=?,pais=?,estado=?,Provincia=?"
+        String sql = "UPDATE ciudad SET nombre=?,pais=?,estado=?,provincia=?"
                 + "WHERE idCiudad =?";
 
         try {
@@ -139,7 +139,7 @@ public class CiudadData {
     
     public List<Ciudad> listarCiudad() {
 
-        String sql = "SELECT idCiudad,nombre,pais,estado,Provincia FROM ciudad WHERE estado = 1";
+        String sql = "SELECT idCiudad,nombre,pais,estado,provincia FROM ciudad WHERE estado = 1";
         ArrayList<Ciudad> ciudades = new ArrayList<>();
         try {
             PreparedStatement ps = con.prepareStatement(sql);
@@ -150,7 +150,7 @@ public class CiudadData {
                 ciudad.setNombre(rs.getString("nombre"));
                 ciudad.setPais(rs.getString("pais"));
                 ciudad.setEstado(true);
-                ciudad.setProvincia(rs.getString("Provincia"));
+                ciudad.setProvincia(rs.getString("provincia"));
                 ciudad.setIdCiudad(rs.getInt("idCiudad"));
                 
                 ciudades.add(ciudad);
