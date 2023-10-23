@@ -27,7 +27,7 @@ public class Alojamientos extends javax.swing.JPanel {
         aData = new AlojamientoData();
         listaA= aData.listarAlojamientos();
         armarCabeceraTabla();
-        cargarCiudad();
+       cargarCiudad();
         
     }
 
@@ -212,7 +212,11 @@ public class Alojamientos extends javax.swing.JPanel {
 
     private void cboxCiudades2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboxCiudades2ActionPerformed
         // TODO add your handling code here:
+        
+        
         cargarAlojamientos();
+        
+        
     }//GEN-LAST:event_cboxCiudades2ActionPerformed
 
 
@@ -287,7 +291,6 @@ public class Alojamientos extends javax.swing.JPanel {
 
     Ciudad selec = (Ciudad) cboxCiudades2.getSelectedItem();
     int ciudadId = selec.getIdCiudad(); // guardo el ID de la ciudad marcada en el cbox
-
     List<Alojamiento> alojamientos = aData.listarAlojamientos();// lista de todos los alojamientos
 
     // filtro los alojamientos segun el ID de la ciudad del cbox

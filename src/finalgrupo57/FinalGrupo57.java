@@ -6,9 +6,11 @@
 package finalgrupo57;
 
 import finalgrupo57.AccesoADatos.CiudadData;
+import finalgrupo57.AccesoADatos.Conexion;
 import finalgrupo57.AccesoADatos.PasajeData;
 import finalgrupo57.Entidades.Ciudad;
 import finalgrupo57.Entidades.Pasaje;
+import java.sql.Connection;
 
 /**
  *
@@ -20,7 +22,12 @@ public class FinalGrupo57 {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
+        Connection con= Conexion.getConexion();
         
+        
+        Ciudad ciu=new Ciudad(3, "Posadas", "Argentina", true, "Misiones");
+        CiudadData cd=new CiudadData();
+        System.out.println(cd.buscarCiudad(3));
         //CiudadData cD = new CiudadData();
         
         //Ciudad sanLuis = new Ciudad(4, "San Juan", "Argentina", true, "San Juan");

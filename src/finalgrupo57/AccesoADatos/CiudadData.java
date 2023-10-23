@@ -120,7 +120,7 @@ public class CiudadData {
                 ciudad.setIdCiudad(id);
 
             } else {
-                JOptionPane.showMessageDialog(null, "No se encontro la ciudad");
+                JOptionPane.showMessageDialog(null, "No se encontro la ciudad"); //se muestra todo el tiempo
 
             }
 
