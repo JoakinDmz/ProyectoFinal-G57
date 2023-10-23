@@ -36,14 +36,14 @@ public class PanelAdministrador extends javax.swing.JPanel {
         jButton3 = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        jtCiudades = new javax.swing.JTable();
         jLabel3 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTable2 = new javax.swing.JTable();
+        jtTransportes = new javax.swing.JTable();
         jScrollPane3 = new javax.swing.JScrollPane();
-        jTable3 = new javax.swing.JTable();
+        jtPaquetes = new javax.swing.JTable();
         jScrollPane4 = new javax.swing.JScrollPane();
-        jTable4 = new javax.swing.JTable();
+        jtAlojamientos = new javax.swing.JTable();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jTextField1 = new javax.swing.JTextField();
@@ -123,7 +123,7 @@ public class PanelAdministrador extends javax.swing.JPanel {
         jLabel2.setForeground(new java.awt.Color(0, 0, 0));
         jLabel2.setText("Ciudades:");
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        jtCiudades.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -134,12 +134,12 @@ public class PanelAdministrador extends javax.swing.JPanel {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(jtCiudades);
 
         jLabel3.setForeground(new java.awt.Color(0, 0, 0));
         jLabel3.setText("Alojamientos:");
 
-        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+        jtTransportes.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -150,9 +150,9 @@ public class PanelAdministrador extends javax.swing.JPanel {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane2.setViewportView(jTable2);
+        jScrollPane2.setViewportView(jtTransportes);
 
-        jTable3.setModel(new javax.swing.table.DefaultTableModel(
+        jtPaquetes.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -163,9 +163,9 @@ public class PanelAdministrador extends javax.swing.JPanel {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane3.setViewportView(jTable3);
+        jScrollPane3.setViewportView(jtPaquetes);
 
-        jTable4.setModel(new javax.swing.table.DefaultTableModel(
+        jtAlojamientos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -176,7 +176,7 @@ public class PanelAdministrador extends javax.swing.JPanel {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane4.setViewportView(jTable4);
+        jScrollPane4.setViewportView(jtAlojamientos);
 
         jLabel4.setForeground(new java.awt.Color(0, 0, 0));
         jLabel4.setText("Transportes:");
@@ -319,15 +319,15 @@ public class PanelAdministrador extends javax.swing.JPanel {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JTable jTable2;
-    private javax.swing.JTable jTable3;
-    private javax.swing.JTable jTable4;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField3;
     private javax.swing.JTextField jTextField4;
     private javax.swing.JButton jbSalir;
+    private javax.swing.JTable jtAlojamientos;
+    private javax.swing.JTable jtCiudades;
+    private javax.swing.JTable jtPaquetes;
+    private javax.swing.JTable jtTransportes;
     // End of variables declaration//GEN-END:variables
 
 }
