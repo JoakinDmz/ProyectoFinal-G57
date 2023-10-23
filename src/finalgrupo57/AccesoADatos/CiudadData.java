@@ -58,8 +58,13 @@ public class CiudadData {
 
     public void modificarCiudad(Ciudad ciudad) {
 
+<<<<<<< Updated upstream
         String sql = "UPDATE ciudad SET nombre = ?,pais = ?,provincia = ?, estado = ? "
                 + "WHERE idCiudad =? ";
+=======
+        String sql = "UPDATE ciudad SET nombre=?,pais=?,estado=?,Provincia=? "
+                + "WHERE idCiudad =?";
+>>>>>>> Stashed changes
 
         try {
             PreparedStatement ps = con.prepareStatement(sql);
@@ -130,6 +135,41 @@ public class CiudadData {
             JOptionPane.showMessageDialog(null, "Error al buscar ciudad");
         }
         return ciudad;
+        
+     
+    }
+    
+        public Ciudad buscarCiudadParaLista(int id) {
+
+        String sql = "SELECT nombre,pais,estado,provincia FROM ciudad WHERE idCiudad= ? AND estado = 1";
+        Ciudad ciudad = new Ciudad();
+        try {
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setInt(1, id);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                ciudad.setNombre(rs.getString("nombre"));
+                ciudad.setPais(rs.getString("pais"));
+                //ciudad.setEstado(true);
+                ciudad.setProvincia(rs.getString("provincia"));
+                ciudad.setEstado(rs.getBoolean("estado"));//SE COMENTO ciudad.setEstado(true) y agrego esta linea
+                ciudad.setIdCiudad(id);
+
+            } else {
+                
+
+            }
+
+            ps.close();
+
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error al buscar ciudad");
+        }
+        return ciudad;
+        
+        
+        
+        
 
     }
     

@@ -17,7 +17,7 @@ import javax.swing.JOptionPane;
 public class Conexion {
     
     private static final String URL="jdbc:mariadb://localhost/";
-    private static final String DB="sqlproyectofinal";//se cambio trabajofinal
+    private static final String DB="trabajofinal";//se cambio trabajofinal
     private static final String USUARIO="root";
     private static final String PASSWORD="";
     private static Connection connection;
@@ -35,7 +35,7 @@ public class Conexion {
                     } catch (ClassNotFoundException ex) {
             JOptionPane.showMessageDialog(null, "Error al cargar los drivers");
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Error al conectarse");
+            JOptionPane.showMessageDialog(null, "Error al conectarse "+ ex.getMessage());
         }
     }
     return connection;

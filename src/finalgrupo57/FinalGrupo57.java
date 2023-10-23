@@ -23,11 +23,14 @@ public class FinalGrupo57 {
      */
     public static void main(String[] args) {
         Connection con= Conexion.getConexion();
+<<<<<<< Updated upstream
         
         
         Ciudad ciu=new Ciudad(3, "Posadas", "Argentina", true, "Misiones");
         CiudadData cd=new CiudadData();
         System.out.println(cd.buscarCiudad(3));
+=======
+>>>>>>> Stashed changes
         //CiudadData cD = new CiudadData();
         
         //Ciudad sanLuis = new Ciudad(4, "San Juan", "Argentina", true, "San Juan");

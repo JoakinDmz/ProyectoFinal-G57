@@ -36,7 +36,7 @@ public class AlojamientoData {
                 alo.setServicio(rs.getString("servicio"));
                 alo.setTipo(rs.getString("tipo"));
                 alo.setImporteDiario(rs.getDouble("importeDiario"));
-                alo.setCiudadDest(cd.buscarCiudad(rs.getInt("ciudadDest")));
+                alo.setCiudadDest(cd.buscarCiudadParaLista(rs.getInt("ciudadDest")));
                 alojamientos.add(alo);
 
             } 
