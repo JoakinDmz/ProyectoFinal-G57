@@ -58,13 +58,13 @@ public class CiudadData {
 
     public void modificarCiudad(Ciudad ciudad) {
 
-<<<<<<< Updated upstream
+
         String sql = "UPDATE ciudad SET nombre = ?,pais = ?,provincia = ?, estado = ? "
                 + "WHERE idCiudad =? ";
-=======
-        String sql = "UPDATE ciudad SET nombre=?,pais=?,estado=?,Provincia=? "
-                + "WHERE idCiudad =?";
->>>>>>> Stashed changes
+
+//        String sql = "UPDATE ciudad SET nombre=?,pais=?,estado=?,Provincia=? "
+//                + "WHERE idCiudad =?";
+
 
         try {
             PreparedStatement ps = con.prepareStatement(sql);

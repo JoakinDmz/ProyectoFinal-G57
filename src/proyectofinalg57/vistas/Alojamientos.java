@@ -27,7 +27,7 @@ public class Alojamientos extends javax.swing.JPanel {
         aData = new AlojamientoData();
         listaA= aData.listarAlojamientos();
         armarCabeceraTabla();
-       cargarCiudad();
+        cargarCiudad();
         
     }
 
@@ -214,7 +214,7 @@ public class Alojamientos extends javax.swing.JPanel {
         // TODO add your handling code here:
         
         
-       // cargarAlojamientos();
+       cargarAlojamientos();
         
         
     }//GEN-LAST:event_cboxCiudades2ActionPerformed
