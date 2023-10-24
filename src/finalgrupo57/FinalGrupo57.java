@@ -7,10 +7,14 @@ package finalgrupo57;
 
 import finalgrupo57.AccesoADatos.CiudadData;
 import finalgrupo57.AccesoADatos.Conexion;
+import finalgrupo57.AccesoADatos.PaqueteData;
 import finalgrupo57.AccesoADatos.PasajeData;
+import finalgrupo57.Entidades.Alojamiento;
 import finalgrupo57.Entidades.Ciudad;
+import finalgrupo57.Entidades.Paquete;
 import finalgrupo57.Entidades.Pasaje;
 import java.sql.Connection;
+import java.time.LocalDate;
 
 /**
  *
@@ -34,7 +38,7 @@ public class FinalGrupo57 {
         //cd.borrarCiudad(ciu);
         //cd.borrarCiudad(ciu2);        
         Ciudad ciu3=new Ciudad(3, "Posadas", "Argentina", true, "Misiones");
-        cd.borrarCiudad(ciu3);
+        //cd.borrarCiudad(ciu3);
         //CiudadData cd=new CiudadData();
         //System.out.println(cd.buscarCiudad(3));
 
@@ -55,10 +59,10 @@ public class FinalGrupo57 {
 //            System.out.println(x.getPais());
 //        }
         //PasajeData pD = new PasajeData();
-        //Pasaje pas = new Pasaje(1,"Avion", 10000, merlo, true);
+        Pasaje pas = new Pasaje(1,"Avion", 10000, ciu3, true);
         //Pasaje pas2 = new Pasaje (7,"auto",2, sanLuis,true);
         //pD.guardarPasaje(pas);
-        
+        //Alojamiento alo = new Alojamiento(14,, LocalDate.MIN, true, servicio, 0, ciu3, tipo)
         //Para poder modificar el pasaje hay que pasarle el numero de id
         //pD.modificarPasaje(pas2);
         //pD.eliminarPasaje(pas);
@@ -71,5 +75,12 @@ public class FinalGrupo57 {
 //            System.out.println(x.getNombreCiudadOrigen().getNombre());
 //        }
 //        
+
+      PaqueteData paD = new PaqueteData();
+       Paquete pa1 = paD.buscarPaquete(12);
+        System.out.println(paD.calcularPrecio(pa1));
+
+
+
     }
 }
