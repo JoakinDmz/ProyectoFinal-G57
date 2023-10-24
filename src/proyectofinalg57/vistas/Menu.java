@@ -57,6 +57,7 @@ public class Menu extends javax.swing.JFrame {
         jpVisualizador2 = new javax.swing.JPanel();
         jpVisualizador3 = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
+        jpVisualizador4 = new javax.swing.JPanel();
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -76,6 +77,7 @@ public class Menu extends javax.swing.JFrame {
         jLabel2.setText("jLabel2");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel2.setBackground(new java.awt.Color(0, 153, 0,60));
 
@@ -180,6 +182,8 @@ public class Menu extends javax.swing.JFrame {
                 .addComponent(jbModAdmin))
         );
 
+        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
+
         jpVisualizador.setBackground(new java.awt.Color(255, 255, 255));
         jpVisualizador.setOpaque(false);
         jpVisualizador.setPreferredSize(new java.awt.Dimension(360, 430));
@@ -194,6 +198,8 @@ public class Menu extends javax.swing.JFrame {
             jpVisualizadorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 540, Short.MAX_VALUE)
         );
+
+        getContentPane().add(jpVisualizador, new org.netbeans.lib.awtextra.AbsoluteConstraints(266, 47, -1, 540));
 
         jpVisualizador2.setBackground(new java.awt.Color(255, 255, 255));
         jpVisualizador2.setOpaque(false);
@@ -210,6 +216,8 @@ public class Menu extends javax.swing.JFrame {
             .addGap(0, 540, Short.MAX_VALUE)
         );
 
+        getContentPane().add(jpVisualizador2, new org.netbeans.lib.awtextra.AbsoluteConstraints(632, 47, 400, -1));
+
         jpVisualizador3.setBackground(new java.awt.Color(255, 255, 255));
         jpVisualizador3.setOpaque(false);
 
@@ -224,42 +232,26 @@ public class Menu extends javax.swing.JFrame {
             .addGap(0, 540, Short.MAX_VALUE)
         );
 
+        getContentPane().add(jpVisualizador3, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 50, -1, -1));
+
         jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/travel2.png"))); // NOI18N
         jLabel5.setPreferredSize(new java.awt.Dimension(150, 150));
+        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 620, 140, 140));
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jpVisualizador, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(6, 6, 6)
-                        .addComponent(jpVisualizador2, javax.swing.GroupLayout.PREFERRED_SIZE, 400, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(4, 4, 4)
-                        .addComponent(jpVisualizador3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(604, 604, 604)
-                        .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))))
+        jpVisualizador4.setOpaque(false);
+
+        javax.swing.GroupLayout jpVisualizador4Layout = new javax.swing.GroupLayout(jpVisualizador4);
+        jpVisualizador4.setLayout(jpVisualizador4Layout);
+        jpVisualizador4Layout.setHorizontalGroup(
+            jpVisualizador4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 750, Short.MAX_VALUE)
         );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(47, 47, 47)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jpVisualizador, javax.swing.GroupLayout.PREFERRED_SIZE, 540, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jpVisualizador2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(3, 3, 3)
-                        .addComponent(jpVisualizador3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addGap(30, 30, 30)
-                .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))
+        jpVisualizador4Layout.setVerticalGroup(
+            jpVisualizador4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 600, Short.MAX_VALUE)
         );
+
+        getContentPane().add(jpVisualizador4, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 70, 750, 600));
 
         pack();
         setLocationRelativeTo(null);
@@ -309,13 +301,13 @@ public class Menu extends javax.swing.JFrame {
     private void jbModAdminActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbModAdminActionPerformed
         // TODO add your handling code here:
         PanelAdministrador paneladmin = new PanelAdministrador();
-        paneladmin.setSize(750,540);
+        paneladmin.setSize(750,600);
         paneladmin.setLocation(0,0);
         
-        jpVisualizador3.removeAll();
-        jpVisualizador3.add(paneladmin,BorderLayout.CENTER);
-        jpVisualizador3.revalidate();
-        jpVisualizador3.repaint();
+        jpVisualizador4.removeAll();
+        jpVisualizador4.add(paneladmin,BorderLayout.CENTER);
+        jpVisualizador4.revalidate();
+        jpVisualizador4.repaint();
     }//GEN-LAST:event_jbModAdminActionPerformed
 
     private void jbPaquetesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbPaquetesActionPerformed
@@ -390,6 +382,7 @@ public class Menu extends javax.swing.JFrame {
     private javax.swing.JPanel jpVisualizador;
     private javax.swing.JPanel jpVisualizador2;
     private javax.swing.JPanel jpVisualizador3;
+    private javax.swing.JPanel jpVisualizador4;
     // End of variables declaration//GEN-END:variables
 
     class FondoPanel extends JPanel{
