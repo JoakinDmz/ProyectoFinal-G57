@@ -87,16 +87,17 @@ public class CiudadData {
     }
 
     public void borrarCiudad(Ciudad ciudad) {
-
-        String sql = "UPDATE ciudad SET estado=0 WHERE idCiudad=?";
-
+         //ahora borrarCiudad tambien cambia el estado de los alojamientos en dicha ciudad
+        String sql = "UPDATE ciudad, alojamiento SET ciudad.estado=0, alojamiento.estado=0 WHERE idCiudad=? AND ciudadDest=? AND ciudad.estado=1";
+           
         try {
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setInt(1, ciudad.getIdCiudad());
+            ps.setInt(2, ciudad.getIdCiudad());
 
             int x = ps.executeUpdate();
-
-            if (x == 1) {
+           // System.out.println(x);
+            if (x >= 1) {
                 JOptionPane.showMessageDialog(null, "Ciudad borrada");
             }
            ps.close();

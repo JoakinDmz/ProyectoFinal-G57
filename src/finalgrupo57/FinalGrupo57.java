@@ -27,10 +27,14 @@ public class FinalGrupo57 {
         //creamos una cuidad
         Ciudad ciu=new Ciudad(12,"La Banda", "Argentina", true, "Santiago del Estero");
         CiudadData cd= new CiudadData();
+        Ciudad ciu2 = cd.buscarCiudad(9);
+        //System.out.println(ciu2+""+ ciu2.getIdCiudad());
         //cd.guardarCiudad(ciu);
         //para borrar agregamos id antes de ciudad en ciu
-        cd.borrarCiudad(ciu);
-        //Ciudad ciu=new Ciudad(3, "Posadas", "Argentina", true, "Misiones");
+        //cd.borrarCiudad(ciu);
+        //cd.borrarCiudad(ciu2);        
+        Ciudad ciu3=new Ciudad(3, "Posadas", "Argentina", true, "Misiones");
+        cd.borrarCiudad(ciu3);
         //CiudadData cd=new CiudadData();
         //System.out.println(cd.buscarCiudad(3));
 
