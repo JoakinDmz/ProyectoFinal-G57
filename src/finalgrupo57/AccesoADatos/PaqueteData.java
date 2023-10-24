@@ -13,6 +13,9 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import finalgrupo57.Entidades.*;
+import java.time.LocalDate;
+import java.time.Month;
+import java.time.temporal.ChronoUnit;
 
 
 
@@ -161,6 +164,47 @@ public class PaqueteData {
     
     
 }
+     
+     
+      public String tipoTemporada(LocalDate fecha1, LocalDate fecha2) {
+        int inicio = fecha1.getMonthValue();
+        int fin = fecha2.getMonthValue();
+
+        if (inicio == Month.JANUARY.getValue() || inicio == Month.JULY.getValue() && fin == Month.JANUARY.getValue() || inicio == Month.JULY.getValue()) {
+            return "Alta";
+        } else if ((inicio == Month.FEBRUARY.getValue() || inicio == Month.JUNE.getValue())
+                && (fin == Month.FEBRUARY.getValue() || fin == Month.JUNE.getValue())) {
+            return "Media";
+        } else {
+            return "Baja";
+        }
+
+    }
+
+    public double calcularPrecio(Paquete paquete) {
+        PaqueteData pD = new PaqueteData();
+        double precioAl = paquete.getAlojamiento().getImporteDiario();
+        double precioPa = paquete.getPasaje().getImporte();
+
+        long dias = ChronoUnit.DAYS.between(paquete.getAlojamiento().getFechaIn(), paquete.getAlojamiento().getFechaOn());
+        System.out.println(dias);
+        double total = (dias * precioAl) + precioPa;
+
+        if (tipoTemporada(paquete.getAlojamiento().getFechaIn(), paquete.getAlojamiento().getFechaOn()).equals("Alta")) {
+            return total * 1.30;
+        } else if (tipoTemporada(paquete.getAlojamiento().getFechaIn(), paquete.getAlojamiento().getFechaOn()).equals("Media")) {
+            return total * 1.15;
+        } else {
+
+            return total;
+
+        }
+
+    }
+     
+     
+     
+     
      
 
 }
