@@ -13,6 +13,7 @@ import finalgrupo57.Entidades.Alojamiento;
 import finalgrupo57.Entidades.Ciudad;
 import finalgrupo57.Entidades.Paquete;
 import finalgrupo57.Entidades.Pasaje;
+import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
@@ -186,15 +187,39 @@ public class PanelAdmin2 extends javax.swing.JPanel {
 
         jLabel4.setText("Provincia/Estado/Region:");
 
+        jTextCiudad.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextCiudadActionPerformed(evt);
+            }
+        });
+        jTextCiudad.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jTextCiudadKeyPressed(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTextCiudadKeyTyped(evt);
+            }
+        });
+
         jTextPais.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextPaisActionPerformed(evt);
+            }
+        });
+        jTextPais.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTextPaisKeyTyped(evt);
             }
         });
 
         jTextProvincia.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextProvinciaActionPerformed(evt);
+            }
+        });
+        jTextProvincia.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTextProvinciaKeyTyped(evt);
             }
         });
 
@@ -339,6 +364,29 @@ public class PanelAdmin2 extends javax.swing.JPanel {
                 jTextCiudadAloActionPerformed(evt);
             }
         });
+        jTextCiudadAlo.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTextCiudadAloKeyTyped(evt);
+            }
+        });
+
+        jTextTipoAlo.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTextTipoAloKeyTyped(evt);
+            }
+        });
+
+        jTextCostoAlo.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTextCostoAloKeyTyped(evt);
+            }
+        });
+
+        jTextServicioAlo.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTextServicioAloKeyTyped(evt);
+            }
+        });
 
         jbAgregarAlo.setText("Agregar");
         jbAgregarAlo.addActionListener(new java.awt.event.ActionListener() {
@@ -464,6 +512,24 @@ public class PanelAdmin2 extends javax.swing.JPanel {
 
         jLabel12.setText("Ciudad de Origen:");
 
+        jTextTipoTransp.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTextTipoTranspKeyTyped(evt);
+            }
+        });
+
+        jTextPrecioTransp.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTextPrecioTranspKeyTyped(evt);
+            }
+        });
+
+        jTextCiudadOrigenTransp.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTextCiudadOrigenTranspKeyTyped(evt);
+            }
+        });
+
         jbAgregarTran.setText("Agregar");
         jbAgregarTran.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -582,6 +648,30 @@ public class PanelAdmin2 extends javax.swing.JPanel {
         jLabel15.setText("Alojamiento:");
 
         jLabel16.setText("Transporte:");
+
+        jTextCiuOrgPaq.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTextCiuOrgPaqKeyTyped(evt);
+            }
+        });
+
+        jTextCiuDesPaq.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTextCiuDesPaqKeyTyped(evt);
+            }
+        });
+
+        jTextAlojamientoPaq.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTextAlojamientoPaqKeyTyped(evt);
+            }
+        });
+
+        jTextTransportePaq.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTextTransportePaqKeyTyped(evt);
+            }
+        });
 
         jbAgregarPaq.setText("Agregar");
         jbAgregarPaq.addActionListener(new java.awt.event.ActionListener() {
@@ -841,6 +931,160 @@ public class PanelAdmin2 extends javax.swing.JPanel {
     private void jbLimpiarPaqActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbLimpiarPaqActionPerformed
         limpiarPaquetes();
     }//GEN-LAST:event_jbLimpiarPaqActionPerformed
+
+    private void jTextCiudadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextCiudadActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextCiudadActionPerformed
+
+    private void jTextCiudadKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextCiudadKeyPressed
+       
+    }//GEN-LAST:event_jTextCiudadKeyPressed
+
+    private void jTextCiudadKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextCiudadKeyTyped
+        char c = evt.getKeyChar();
+    
+    if (Character.isLetter(c) || Character.isWhitespace(c) || Character.isISOControl(c)) {
+        // Permite letras, espacios en blanco y teclas de control (como borrar).
+        
+    } else {
+        evt.consume();  // Consumir el evento para evitar que se ingresen otros caracteres.
+    }
+    }//GEN-LAST:event_jTextCiudadKeyTyped
+
+    private void jTextPaisKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextPaisKeyTyped
+       char c = evt.getKeyChar();
+    
+    if (Character.isLetter(c) || Character.isWhitespace(c) || Character.isISOControl(c)) {
+        // Permite letras, espacios en blanco y teclas de control (como borrar).
+        
+    } else {
+        evt.consume();  // Consumir el evento para evitar que se ingresen otros caracteres.
+    }
+    }//GEN-LAST:event_jTextPaisKeyTyped
+
+    private void jTextProvinciaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextProvinciaKeyTyped
+        char c = evt.getKeyChar();
+    
+    if (Character.isLetter(c) || Character.isWhitespace(c) || Character.isISOControl(c)) {
+        // Permite letras, espacios en blanco y teclas de control (como borrar).
+        
+    } else {
+        evt.consume();  // Consumir el evento para evitar que se ingresen otros caracteres.
+    }
+    }//GEN-LAST:event_jTextProvinciaKeyTyped
+
+    private void jTextCiudadAloKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextCiudadAloKeyTyped
+        char c = evt.getKeyChar();
+    
+    if (Character.isLetter(c) || Character.isWhitespace(c) || Character.isISOControl(c)) {
+        // Permite letras, espacios en blanco y teclas de control (como borrar).
+        
+    } else {
+        evt.consume();  // Consumir el evento para evitar que se ingresen otros caracteres.
+    }
+    }//GEN-LAST:event_jTextCiudadAloKeyTyped
+
+    private void jTextTipoAloKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextTipoAloKeyTyped
+        char c = evt.getKeyChar();
+    
+    if (Character.isLetter(c) || Character.isWhitespace(c) || Character.isISOControl(c)) {
+        // Permite letras, espacios en blanco y teclas de control (como borrar).
+        
+    } else {
+        evt.consume();  // Consumir el evento para evitar que se ingresen otros caracteres.
+    }
+    }//GEN-LAST:event_jTextTipoAloKeyTyped
+
+    private void jTextServicioAloKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextServicioAloKeyTyped
+        char c = evt.getKeyChar();
+    
+    if (Character.isLetter(c) || Character.isWhitespace(c) || Character.isISOControl(c)) {
+        // Permite letras, espacios en blanco y teclas de control (como borrar).
+        
+    } else {
+        evt.consume();  // Consumir el evento para evitar que se ingresen otros caracteres.
+    }
+    }//GEN-LAST:event_jTextServicioAloKeyTyped
+
+    private void jTextCostoAloKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextCostoAloKeyTyped
+        char c = evt.getKeyChar();
+    if (!(Character.isDigit(c) || (c == KeyEvent.VK_BACK_SPACE) || (c == KeyEvent.VK_DELETE))) {
+        evt.consume(); // Esto consume el evento y evita que el carácter ingresado se muestre en el campo de texto.
+    }
+    }//GEN-LAST:event_jTextCostoAloKeyTyped
+
+    private void jTextTipoTranspKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextTipoTranspKeyTyped
+        char c = evt.getKeyChar();
+    
+    if (Character.isLetter(c) || Character.isWhitespace(c) || Character.isISOControl(c)) {
+        // Permite letras, espacios en blanco y teclas de control (como borrar).
+        
+    } else {
+        evt.consume();  // Consumir el evento para evitar que se ingresen otros caracteres.
+    }
+    }//GEN-LAST:event_jTextTipoTranspKeyTyped
+
+    private void jTextPrecioTranspKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextPrecioTranspKeyTyped
+        char c = evt.getKeyChar();
+    if (!(Character.isDigit(c) || (c == KeyEvent.VK_BACK_SPACE) || (c == KeyEvent.VK_DELETE))) {
+        evt.consume(); // Esto consume el evento y evita que el carácter ingresado se muestre en el campo de texto.
+    }
+    }//GEN-LAST:event_jTextPrecioTranspKeyTyped
+
+    private void jTextCiudadOrigenTranspKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextCiudadOrigenTranspKeyTyped
+        char c = evt.getKeyChar();
+    
+    if (Character.isLetter(c) || Character.isWhitespace(c) || Character.isISOControl(c)) {
+        // Permite letras, espacios en blanco y teclas de control (como borrar).
+        
+    } else {
+        evt.consume();  // Consumir el evento para evitar que se ingresen otros caracteres.
+    }
+    }//GEN-LAST:event_jTextCiudadOrigenTranspKeyTyped
+
+    private void jTextCiuOrgPaqKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextCiuOrgPaqKeyTyped
+        char c = evt.getKeyChar();
+    
+    if (Character.isLetter(c) || Character.isWhitespace(c) || Character.isISOControl(c)) {
+        // Permite letras, espacios en blanco y teclas de control (como borrar).
+        
+    } else {
+        evt.consume();  // Consumir el evento para evitar que se ingresen otros caracteres.
+    }
+    }//GEN-LAST:event_jTextCiuOrgPaqKeyTyped
+
+    private void jTextCiuDesPaqKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextCiuDesPaqKeyTyped
+        char c = evt.getKeyChar();
+    
+    if (Character.isLetter(c) || Character.isWhitespace(c) || Character.isISOControl(c)) {
+        // Permite letras, espacios en blanco y teclas de control (como borrar).
+        
+    } else {
+        evt.consume();  // Consumir el evento para evitar que se ingresen otros caracteres.
+    }
+    }//GEN-LAST:event_jTextCiuDesPaqKeyTyped
+
+    private void jTextAlojamientoPaqKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextAlojamientoPaqKeyTyped
+        char c = evt.getKeyChar();
+    
+    if (Character.isLetter(c) || Character.isWhitespace(c) || Character.isISOControl(c)) {
+        // Permite letras, espacios en blanco y teclas de control (como borrar).
+        
+    } else {
+        evt.consume();  // Consumir el evento para evitar que se ingresen otros caracteres.
+    }
+    }//GEN-LAST:event_jTextAlojamientoPaqKeyTyped
+
+    private void jTextTransportePaqKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextTransportePaqKeyTyped
+        char c = evt.getKeyChar();
+    
+    if (Character.isLetter(c) || Character.isWhitespace(c) || Character.isISOControl(c)) {
+        // Permite letras, espacios en blanco y teclas de control (como borrar).
+        
+    } else {
+        evt.consume();  // Consumir el evento para evitar que se ingresen otros caracteres.
+    }
+    }//GEN-LAST:event_jTextTransportePaqKeyTyped
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

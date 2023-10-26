@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
-<Form version="1.3" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JPanelFormInfo">
+<Form version="1.5" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JPanelFormInfo">
   <AuxValues>
     <AuxValue name="FormSettings_autoResourcing" type="java.lang.Integer" value="0"/>
     <AuxValue name="FormSettings_autoSetComponentName" type="java.lang.Boolean" value="false"/>
@@ -258,15 +258,22 @@
               </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="jTextCiudad">
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jTextCiudadActionPerformed"/>
+                <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="jTextCiudadKeyPressed"/>
+                <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="jTextCiudadKeyTyped"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JTextField" name="jTextPais">
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jTextPaisActionPerformed"/>
+                <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="jTextPaisKeyTyped"/>
               </Events>
             </Component>
             <Component class="javax.swing.JTextField" name="jTextProvincia">
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jTextProvinciaActionPerformed"/>
+                <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="jTextProvinciaKeyTyped"/>
               </Events>
             </Component>
             <Component class="javax.swing.JButton" name="jbAgregarCiu">
@@ -481,13 +488,23 @@
             <Component class="javax.swing.JTextField" name="jTextCiudadAlo">
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jTextCiudadAloActionPerformed"/>
+                <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="jTextCiudadAloKeyTyped"/>
               </Events>
             </Component>
             <Component class="javax.swing.JTextField" name="jTextTipoAlo">
+              <Events>
+                <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="jTextTipoAloKeyTyped"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JTextField" name="jTextCostoAlo">
+              <Events>
+                <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="jTextCostoAloKeyTyped"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JTextField" name="jTextServicioAlo">
+              <Events>
+                <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="jTextServicioAloKeyTyped"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JButton" name="jbAgregarAlo">
               <Properties>
@@ -673,10 +690,19 @@
               </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="jTextTipoTransp">
+              <Events>
+                <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="jTextTipoTranspKeyTyped"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JTextField" name="jTextPrecioTransp">
+              <Events>
+                <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="jTextPrecioTranspKeyTyped"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JTextField" name="jTextCiudadOrigenTransp">
+              <Events>
+                <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="jTextCiudadOrigenTranspKeyTyped"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JButton" name="jbAgregarTran">
               <Properties>
@@ -880,12 +906,24 @@
               </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="jTextCiuOrgPaq">
+              <Events>
+                <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="jTextCiuOrgPaqKeyTyped"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JTextField" name="jTextCiuDesPaq">
+              <Events>
+                <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="jTextCiuDesPaqKeyTyped"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JTextField" name="jTextAlojamientoPaq">
+              <Events>
+                <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="jTextAlojamientoPaqKeyTyped"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JTextField" name="jTextTransportePaq">
+              <Events>
+                <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="jTextTransportePaqKeyTyped"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JButton" name="jbAgregarPaq">
               <Properties>
