@@ -323,7 +323,8 @@ public class Menu extends javax.swing.JFrame {
 
     private void jbModAdminActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbModAdminActionPerformed
         // TODO add your handling code here:
-        PanelAdministrador paneladmin = new PanelAdministrador();
+        //PanelAdministrador paneladmin = new PanelAdministrador();
+        PanelAdmin2 paneladmin = new PanelAdmin2();
         paneladmin.setSize(840,710);
         paneladmin.setLocation(0,0);
         
