@@ -7,6 +7,7 @@ import javax.swing.JPanel;
 import finalgrupo57.AccesoADatos.CiudadData;
 import finalgrupo57.AccesoADatos.PasajeData;
 import finalgrupo57.Entidades.Pasaje;
+import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -84,34 +85,24 @@ public class Destino extends javax.swing.JPanel {
 
         jPanel1.setBackground(new java.awt.Color(51, 204, 0,120));
 
-        jLabel1.setForeground(new java.awt.Color(0, 0, 0));
         jLabel1.setText("Ciudad de Origen:");
 
-        jLabel2.setForeground(new java.awt.Color(0, 0, 0));
         jLabel2.setText("Ciudad de Destino:");
 
-        jLabel3.setForeground(new java.awt.Color(0, 0, 0));
         jLabel3.setText("Transporte:");
 
-        jLabel4.setForeground(new java.awt.Color(0, 0, 0));
         jLabel4.setText("Fechas de Viaje:");
 
-        jLabel5.setForeground(new java.awt.Color(0, 0, 0));
         jLabel5.setText("Fecha de Inicio:");
 
-        jLabel6.setForeground(new java.awt.Color(0, 0, 0));
         jLabel6.setText("Fecha Final:");
 
-        jLabel7.setForeground(new java.awt.Color(0, 0, 0));
         jLabel7.setText("Pasajeros:");
 
-        jLabel8.setForeground(new java.awt.Color(0, 0, 0));
         jLabel8.setText("Temporada:");
 
-        jLabel9.setForeground(new java.awt.Color(0, 0, 0));
         jLabel9.setText("Costo de Viaje:");
 
-        jLabel10.setForeground(new java.awt.Color(0, 0, 0));
         jLabel10.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel10.setText("(Transporte)");
 
@@ -132,7 +123,7 @@ public class Destino extends javax.swing.JPanel {
                     .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jLabel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jLabel10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(9, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -160,6 +151,12 @@ public class Destino extends javax.swing.JPanel {
                 .addContainerGap(81, Short.MAX_VALUE))
         );
 
+        jtCantidadPasajeros.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jtCantidadPasajerosKeyTyped(evt);
+            }
+        });
+
         jTextField2.setText("ALTAMEDIABAJA- Def");
         jTextField2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -184,7 +181,7 @@ public class Destino extends javax.swing.JPanel {
                         .addContainerGap())
                     .addGroup(jpDestinoLayout.createSequentialGroup()
                         .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addContainerGap(91, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpDestinoLayout.createSequentialGroup()
                         .addGroup(jpDestinoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jDateChooser2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -248,6 +245,13 @@ public class Destino extends javax.swing.JPanel {
     private void cboxCiudadesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboxCiudadesActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_cboxCiudadesActionPerformed
+
+    private void jtCantidadPasajerosKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtCantidadPasajerosKeyTyped
+        char c = evt.getKeyChar();
+    if (!(Character.isDigit(c) || (c == KeyEvent.VK_BACK_SPACE) || (c == KeyEvent.VK_DELETE))) {
+        evt.consume(); // Esto consume el evento y evita que el carácter ingresado se muestre en el campo de texto.
+    }
+    }//GEN-LAST:event_jtCantidadPasajerosKeyTyped
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
