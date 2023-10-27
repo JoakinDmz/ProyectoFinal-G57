@@ -47,6 +47,8 @@ public class PanelAdmin2 extends javax.swing.JPanel {
     private CiudadData ciuDataMod = new CiudadData();
     //paraBorrarCiu
     private CiudadData borrarCiuData= new CiudadData();
+    //paraBorrarAlojamiento
+    private AlojamientoData borrarAloData = new AlojamientoData();
     
     
     public PanelAdmin2() {
@@ -992,6 +994,17 @@ public class PanelAdmin2 extends javax.swing.JPanel {
     }//GEN-LAST:event_jbAgregarAloActionPerformed
 
     private void jbEliminarAloActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbEliminarAloActionPerformed
+        int indice = jtAlojamientos.getSelectedRow();//creo una variable indice y le doy el valor de la fila seleccionada
+        int idalojamiento = Integer.parseInt(jtCiudades.getValueAt(indice,0).toString());
+//        String nombre = jtCiudades.getValueAt(indice,1).toString();
+//        String pais = jtCiudades.getValueAt(indice,2).toString();
+//        String provincia = jtCiudades.getValueAt(indice,3).toString();
+//        Boolean estado = (Boolean) jtCiudades.getValueAt(indice, 4);
+        Alojamiento alojamientoSelec = new Alojamiento();
+        System.out.println(alojamientoSelec);
+        borrarAloData.eliminarAlojamiento(WIDTH);
+        
+        cargarAlojamientos();
         limpiarAlojamiento();
     }//GEN-LAST:event_jbEliminarAloActionPerformed
 
