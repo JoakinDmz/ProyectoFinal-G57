@@ -14,6 +14,7 @@ import finalgrupo57.Entidades.Ciudad;
 import finalgrupo57.Entidades.Paquete;
 import finalgrupo57.Entidades.Pasaje;
 import java.awt.event.KeyEvent;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
@@ -47,9 +48,12 @@ public class PanelAdmin2 extends javax.swing.JPanel {
     private CiudadData ciuDataMod = new CiudadData();
     //paraBorrarCiu
     private CiudadData borrarCiuData= new CiudadData();
+    //para AgregAloj
+    private AlojamientoData aloData =new AlojamientoData();
+    private Alojamiento alojamientonew=null;
     //paraBorrarAlojamiento
     private AlojamientoData borrarAloData = new AlojamientoData();
-    
+    private AlojamientoData buscarAloData = new AlojamientoData();
     
     public PanelAdmin2() {
         initComponents();
@@ -121,6 +125,10 @@ public class PanelAdmin2 extends javax.swing.JPanel {
         jbEliminarAlo = new javax.swing.JButton();
         jbSalirAlo = new javax.swing.JButton();
         jbLimpiarAlo = new javax.swing.JButton();
+        jLabel17 = new javax.swing.JLabel();
+        jLabel18 = new javax.swing.JLabel();
+        jTextFechaIng = new javax.swing.JTextField();
+        jTextFechaEgr = new javax.swing.JTextField();
         jPanel4 = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
         jtTransportes = new javax.swing.JTable();
@@ -431,6 +439,19 @@ public class PanelAdmin2 extends javax.swing.JPanel {
             }
         });
 
+        jLabel17.setText("Fecha de Ingreso:");
+
+        jLabel18.setText("Fecha de Egreso:");
+
+        jTextFechaIng.setText("AAAA-MM-DD");
+
+        jTextFechaEgr.setText("AAAA-MM-DD");
+        jTextFechaEgr.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextFechaEgrActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -454,16 +475,22 @@ public class PanelAdmin2 extends javax.swing.JPanel {
                             .addComponent(jTextTipoAlo)
                             .addComponent(jTextCostoAlo)
                             .addComponent(jTextServicioAlo, javax.swing.GroupLayout.DEFAULT_SIZE, 220, Short.MAX_VALUE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel17)
+                            .addComponent(jLabel18)))
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGap(0, 8, Short.MAX_VALUE)
                         .addComponent(jbLimpiarAlo)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 123, Short.MAX_VALUE)
                         .addComponent(jbAgregarAlo)
                         .addGap(118, 118, 118)
-                        .addComponent(jbModificarAlo)
-                        .addGap(107, 107, 107)))
-                .addComponent(jbEliminarAlo)
+                        .addComponent(jbModificarAlo)))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jbEliminarAlo, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jTextFechaIng, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 165, Short.MAX_VALUE)
+                    .addComponent(jTextFechaEgr))
                 .addGap(100, 100, 100)
                 .addComponent(jbSalirAlo)
                 .addGap(18, 18, 18))
@@ -476,11 +503,15 @@ public class PanelAdmin2 extends javax.swing.JPanel {
                 .addGap(41, 41, 41)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
-                    .addComponent(jTextCiudadAlo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jTextCiudadAlo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel17)
+                    .addComponent(jTextFechaIng, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(29, 29, 29)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7)
-                    .addComponent(jTextTipoAlo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jTextTipoAlo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel18)
+                    .addComponent(jTextFechaEgr, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(28, 28, 28)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel8)
@@ -901,6 +932,9 @@ public class PanelAdmin2 extends javax.swing.JPanel {
     }//GEN-LAST:event_jTextCiudadAloActionPerformed
 
     private void jbModificarAloActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbModificarAloActionPerformed
+        //Voy a salvar el valor en la fila de la columna ID
+        //Usare el ID para buscar el alojamiento y posterior se lo asigno a un nuevo objeto alojamiento
+        //
         limpiarAlojamiento();
         
     }//GEN-LAST:event_jbModificarAloActionPerformed
@@ -990,19 +1024,49 @@ public class PanelAdmin2 extends javax.swing.JPanel {
     }//GEN-LAST:event_jbEliminarCiuActionPerformed
 
     private void jbAgregarAloActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbAgregarAloActionPerformed
+        //dado los valores ingresados en los textfield se deben agregar a la tabla y guardar en el sql
+        
+        try{
+        
+        String nombre = jTextCiudadAlo.getText();
+        String tipoAlo = jTextTipoAlo.getText();
+        String costoAlo = jTextCostoAlo.getText();
+        String servicioAlo = jTextServicioAlo.getText();
+        String fechaIng = jTextFechaIng.getText();
+        String fechaEgr = jTextFechaEgr.getText();
+        //necesito asociar el nombre a una ciudad
+        if(nombre.isEmpty()||tipoAlo.isEmpty() || costoAlo.isEmpty() || servicioAlo.isEmpty()||fechaIng.isEmpty()||fechaEgr.isEmpty()){
+            JOptionPane.showMessageDialog(this, "No puede haber campos vacios");
+            return;
+        
+        }
+        
+        
+        if(alojamientonew==null){
+             //ver como hacer con fechaIng que debe ser LocalDate y nombre debe ser una ciudadDest de tipo ciudad
+            //alojamientonew= new Alojamiento(fechaIng, fechaEgr, true, servicioAlo, costoAlo, nombre, tipoAlo);
+            aloData.guardarAlojamiento(alojamientonew);
+        }
+        
+        }catch(IllegalArgumentException ex){//creo que no es el catch correcto
+            //cambio "NumerFormatException" por "IllegalArgumentException"
+            //no sale ningun msj
+            JOptionPane.showMessageDialog(this, "Los campos solo reciben letras");
+        
+        }
+        cargarAlojamientos();        
         limpiarAlojamiento();
     }//GEN-LAST:event_jbAgregarAloActionPerformed
 
     private void jbEliminarAloActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbEliminarAloActionPerformed
+        //para eliminar necesitamos la id, entonces tomaremos el valor seleccionado de la tabla
+        //necesito scar ese valor dado el indice de seleccion en la tabla
         int indice = jtAlojamientos.getSelectedRow();//creo una variable indice y le doy el valor de la fila seleccionada
+        //dado el indice creo una variable donde le designo el valor en la posicion de indice y columna 0 (ID)
         int idalojamiento = Integer.parseInt(jtCiudades.getValueAt(indice,0).toString());
-//        String nombre = jtCiudades.getValueAt(indice,1).toString();
-//        String pais = jtCiudades.getValueAt(indice,2).toString();
-//        String provincia = jtCiudades.getValueAt(indice,3).toString();
-//        Boolean estado = (Boolean) jtCiudades.getValueAt(indice, 4);
-        Alojamiento alojamientoSelec = new Alojamiento();
-        System.out.println(alojamientoSelec);
-        borrarAloData.eliminarAlojamiento(WIDTH);
+
+        //teniendo el idalojamiento lo uso para borrar el alojamiento 
+        borrarAloData.eliminarAlojamiento(idalojamiento);//le paso el valor tomado del alo seleccionado
         
         cargarAlojamientos();
         limpiarAlojamiento();
@@ -1190,6 +1254,10 @@ public class PanelAdmin2 extends javax.swing.JPanel {
     }
     }//GEN-LAST:event_jTextTransportePaqKeyTyped
 
+    private void jTextFechaEgrActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFechaEgrActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextFechaEgrActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JRadioButton botonEstadoCiudad;
@@ -1201,6 +1269,8 @@ public class PanelAdmin2 extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
+    private javax.swing.JLabel jLabel17;
+    private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -1226,6 +1296,8 @@ public class PanelAdmin2 extends javax.swing.JPanel {
     private javax.swing.JTextField jTextCiudadAlo;
     private javax.swing.JTextField jTextCiudadOrigenTransp;
     private javax.swing.JTextField jTextCostoAlo;
+    private javax.swing.JTextField jTextFechaEgr;
+    private javax.swing.JTextField jTextFechaIng;
     private javax.swing.JTextField jTextPais;
     private javax.swing.JTextField jTextPrecioTransp;
     private javax.swing.JTextField jTextProvincia;
@@ -1274,6 +1346,7 @@ public class PanelAdmin2 extends javax.swing.JPanel {
 
 private void armarCabeceraTabla2() {
         ArrayList<Object> filaCabecera = new ArrayList<>();
+        filaCabecera.add("ID");
         filaCabecera.add("Ciudad");
         filaCabecera.add("Tipo");
         filaCabecera.add("Costo Diario");
@@ -1338,11 +1411,12 @@ private void armarCabeceraTabla4() {
     
     for (Alojamiento a : alojamientos) {
         // Accede a los atributos de Alojamiento y agrega una fila a la tabla
+        int idAlo=a.getIdAlojamiento();
         String tipo = a.getTipo();
         String servicio = a.getServicio();
         double precio = a.getImporteDiario();
         Ciudad ciudad = a.getCiudadDest();
-        modelo2.addRow(new Object[]{ciudad, tipo, precio,servicio});
+        modelo2.addRow(new Object[]{idAlo,ciudad, tipo, precio,servicio});
     }
     }
     

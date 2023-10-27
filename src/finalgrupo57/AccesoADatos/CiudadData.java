@@ -86,27 +86,39 @@ public class CiudadData {
 
     }
 
+    
     public void borrarCiudad(Ciudad ciudad) {
-         //ahora borrarCiudad tambien cambia el estado de los alojamientos en dicha ciudad
-        String sql = "UPDATE ciudad, alojamiento SET ciudad.estado=0, alojamiento.estado=0 WHERE idCiudad=? AND ciudadDest=? AND ciudad.estado=1";
-           
+        //ahora borrarCiudad tambien cambia el estado de los alojamientos en dicha ciudad
+        
         try {
+            //borrar la ciudad
+            String sql = "UPDATE ciudad SET estado=0 WHERE (idCiudad=? AND estado=1)";
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setInt(1, ciudad.getIdCiudad());
-            ps.setInt(2, ciudad.getIdCiudad());
+            int borradoCiu = ps.executeUpdate();
+            ps.close();
 
-            int x = ps.executeUpdate();
-           // System.out.println(x);
-            if (x >= 1) {
+            //hacemos otro prepared statement para poder borrar el alojamiento
+            String sqlA = "UPDATE alojamiento SET estado=0 WHERE ciudadDest=?";
+            PreparedStatement psa = con.prepareStatement(sqlA);
+            psa.setInt(1, ciudad.getIdCiudad());
+            int borradoAlo = psa.executeUpdate();
+            psa.close();
+
+            if (borradoCiu >= 1) {
                 JOptionPane.showMessageDialog(null, "Ciudad borrada");
             }
-           ps.close();
+            
+            if (borradoCiu >=1 && borradoAlo >=1) {
+                JOptionPane.showMessageDialog(null, "Los alojamientos que estaban en la ciudad tambien han sido borrados");
+            }
+            ps.close();
         } catch (SQLException ex) {
 
             JOptionPane.showMessageDialog(null, "Error al borrar ciudad " + ex.getMessage());
 
         }
-        
+
     }
 
     public Ciudad buscarCiudad(int id) {
@@ -132,6 +144,7 @@ public class CiudadData {
 
             ps.close();
 
+            
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Error al buscar ciudad");
         }
