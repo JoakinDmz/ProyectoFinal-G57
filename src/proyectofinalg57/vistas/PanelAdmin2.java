@@ -45,6 +45,8 @@ public class PanelAdmin2 extends javax.swing.JPanel {
     //paraModCiu
     private String caja[][];//seria una matriz bidimensional
     private CiudadData ciuDataMod = new CiudadData();
+    //paraBorrarCiu
+    private CiudadData borrarCiuData= new CiudadData();
     
     
     public PanelAdmin2() {
@@ -820,6 +822,7 @@ public class PanelAdmin2 extends javax.swing.JPanel {
                 //si es asi graba o guarda la edicion para luego revisarla con el for
                 jtCiudades.getCellEditor().stopCellEditing();
             }
+            
             for (int i = 0; i < nFilas; i++) {
                 //la idea es que el for revise fila a fila cada elemento de las columnas
                 //se crea una matriz caja donde se usara cada columna de la misma fila para crear una ciudad
@@ -887,7 +890,7 @@ public class PanelAdmin2 extends javax.swing.JPanel {
         } catch (NumberFormatException ex) {
             JOptionPane.showMessageDialog(this, "Ingrese solo números");
         }
-        
+        cargarCiudades();
         limpiarCiudad();
     }//GEN-LAST:event_jbModificarCiuActionPerformed
 
@@ -969,6 +972,18 @@ public class PanelAdmin2 extends javax.swing.JPanel {
     }//GEN-LAST:event_jbAgregarCiuActionPerformed
 
     private void jbEliminarCiuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbEliminarCiuActionPerformed
+        
+        int indice = jtCiudades.getSelectedRow();//creo una variable indice y le doy el valor de la fila seleccionada
+        int idciudad = Integer.parseInt(jtCiudades.getValueAt(indice,0).toString());
+        String nombre = jtCiudades.getValueAt(indice,1).toString();
+        String pais = jtCiudades.getValueAt(indice,2).toString();
+        String provincia = jtCiudades.getValueAt(indice,3).toString();
+        Boolean estado = (Boolean) jtCiudades.getValueAt(indice, 4);
+        Ciudad ciudadSelec = new Ciudad(idciudad,nombre,pais,estado,provincia);
+        System.out.println(ciudadSelec);//hasta aqui crea la ciudadSelec
+        borrarCiuData.borrarCiudad(ciudadSelec);//no la borra
+        
+        cargarCiudades();//no me refresca la tabla porque no borra nada
         limpiarCiudad();
     }//GEN-LAST:event_jbEliminarCiuActionPerformed
 
