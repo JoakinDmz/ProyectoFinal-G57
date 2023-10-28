@@ -15,6 +15,9 @@ import finalgrupo57.Entidades.Paquete;
 import finalgrupo57.Entidades.Pasaje;
 import java.awt.event.KeyEvent;
 import java.time.LocalDate;
+import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
@@ -51,6 +54,13 @@ public class PanelAdmin2 extends javax.swing.JPanel {
     //para AgregAloj
     private AlojamientoData aloData =new AlojamientoData();
     private Alojamiento alojamientonew=null;
+    private CiudadData buscarCiuData = new CiudadData();
+    //modificarAlojamiento
+    private Alojamiento aloSelec = new Alojamiento();
+    private AlojamientoData aloSelecData = new AlojamientoData();
+    private CiudadData buscarCiuModData = new CiudadData();
+    private Alojamiento alojamientoMod=null;
+    private AlojamientoData aloModData= new AlojamientoData();
     //paraBorrarAlojamiento
     private AlojamientoData borrarAloData = new AlojamientoData();
     private AlojamientoData buscarAloData = new AlojamientoData();
@@ -129,6 +139,17 @@ public class PanelAdmin2 extends javax.swing.JPanel {
         jLabel18 = new javax.swing.JLabel();
         jTextFechaIng = new javax.swing.JTextField();
         jTextFechaEgr = new javax.swing.JTextField();
+        jLabel19 = new javax.swing.JLabel();
+        jTextIdCiudadDes = new javax.swing.JTextField();
+        jLabel20 = new javax.swing.JLabel();
+        jLabel21 = new javax.swing.JLabel();
+        jLabel22 = new javax.swing.JLabel();
+        jLabel23 = new javax.swing.JLabel();
+        jLabel24 = new javax.swing.JLabel();
+        jLabel25 = new javax.swing.JLabel();
+        jLabel26 = new javax.swing.JLabel();
+        jLabel27 = new javax.swing.JLabel();
+        jbSeleccionarDeTabla = new javax.swing.JButton();
         jPanel4 = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
         jtTransportes = new javax.swing.JTable();
@@ -443,12 +464,51 @@ public class PanelAdmin2 extends javax.swing.JPanel {
 
         jLabel18.setText("Fecha de Egreso:");
 
-        jTextFechaIng.setText("AAAA-MM-DD");
+        jTextFechaIng.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextFechaIngActionPerformed(evt);
+            }
+        });
 
-        jTextFechaEgr.setText("AAAA-MM-DD");
+        jTextFechaEgr.setToolTipText("");
+        jTextFechaEgr.setName(""); // NOI18N
         jTextFechaEgr.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextFechaEgrActionPerformed(evt);
+            }
+        });
+
+        jLabel19.setText("ID Ciudad Destino:");
+
+        jTextIdCiudadDes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextIdCiudadDesActionPerformed(evt);
+            }
+        });
+
+        jLabel20.setFont(new java.awt.Font("Dialog", 2, 12)); // NOI18N
+        jLabel20.setText("Para AGREGAR un Alojamiento el campo de ID es Obligatorio(*).");
+
+        jLabel21.setFont(new java.awt.Font("Dialog", 2, 12)); // NOI18N
+        jLabel21.setText("* : Campo obligatorio");
+
+        jLabel22.setText("*");
+
+        jLabel23.setText("*");
+
+        jLabel24.setText("*");
+
+        jLabel25.setText("*");
+
+        jLabel26.setFont(new java.awt.Font("Dialog", 2, 12)); // NOI18N
+        jLabel26.setText("Formato para la FECHA: AAAA-MM-dd");
+
+        jLabel27.setText("*");
+
+        jbSeleccionarDeTabla.setText("Seleccionar");
+        jbSeleccionarDeTabla.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbSeleccionarDeTablaActionPerformed(evt);
             }
         });
 
@@ -461,38 +521,76 @@ public class PanelAdmin2 extends javax.swing.JPanel {
                 .addComponent(jScrollPane2)
                 .addContainerGap())
             .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGap(17, 17, 17)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGap(17, 17, 17)
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel9, javax.swing.GroupLayout.DEFAULT_SIZE, 60, Short.MAX_VALUE))
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jTextCiudadAlo)
-                            .addComponent(jTextTipoAlo)
-                            .addComponent(jTextCostoAlo)
-                            .addComponent(jTextServicioAlo, javax.swing.GroupLayout.DEFAULT_SIZE, 220, Short.MAX_VALUE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel17)
-                            .addComponent(jLabel18)))
+                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jPanel3Layout.createSequentialGroup()
+                                        .addGap(0, 0, Short.MAX_VALUE)
+                                        .addComponent(jbLimpiarAlo))
+                                    .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(47, 47, 47)
+                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jPanel3Layout.createSequentialGroup()
+                                        .addComponent(jTextCostoAlo, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jLabel24, javax.swing.GroupLayout.PREFERRED_SIZE, 13, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                    .addGroup(jPanel3Layout.createSequentialGroup()
+                                        .addGap(0, 6, Short.MAX_VALUE)
+                                        .addComponent(jbAgregarAlo)
+                                        .addGap(76, 76, 76)
+                                        .addComponent(jbSeleccionarDeTabla)
+                                        .addGap(69, 69, 69))))
+                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                        .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, 60, Short.MAX_VALUE)
+                                        .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                    .addComponent(jLabel19))
+                                .addGap(18, 18, 18)
+                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jTextCiudadAlo, javax.swing.GroupLayout.DEFAULT_SIZE, 220, Short.MAX_VALUE)
+                                    .addComponent(jTextTipoAlo)
+                                    .addComponent(jTextIdCiudadDes))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel25, javax.swing.GroupLayout.PREFERRED_SIZE, 13, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel27, javax.swing.GroupLayout.PREFERRED_SIZE, 13, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addGap(302, 302, 302)
+                                .addComponent(jbSalirAlo))
+                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addGroup(jPanel3Layout.createSequentialGroup()
+                                        .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(jTextServicioAlo, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(jPanel3Layout.createSequentialGroup()
+                                        .addComponent(jLabel17)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(jTextFechaIng, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(jLabel26, javax.swing.GroupLayout.PREFERRED_SIZE, 283, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(jPanel3Layout.createSequentialGroup()
+                                        .addComponent(jLabel18)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(jTextFechaEgr, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel23, javax.swing.GroupLayout.PREFERRED_SIZE, 13, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel22, javax.swing.GroupLayout.PREFERRED_SIZE, 13, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addComponent(jbModificarAlo)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jbEliminarAlo)
+                                .addGap(128, 128, 128))))
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGap(0, 8, Short.MAX_VALUE)
-                        .addComponent(jbLimpiarAlo)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 123, Short.MAX_VALUE)
-                        .addComponent(jbAgregarAlo)
-                        .addGap(118, 118, 118)
-                        .addComponent(jbModificarAlo)))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jbEliminarAlo, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jTextFechaIng, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 165, Short.MAX_VALUE)
-                    .addComponent(jTextFechaEgr))
-                .addGap(100, 100, 100)
-                .addComponent(jbSalirAlo)
+                        .addComponent(jLabel20)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel21)))
                 .addGap(18, 18, 18))
         );
         jPanel3Layout.setVerticalGroup(
@@ -500,33 +598,46 @@ public class PanelAdmin2 extends javax.swing.JPanel {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGap(30, 30, 30)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(41, 41, 41)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel20)
+                    .addComponent(jLabel21))
+                .addGap(19, 19, 19)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel9)
+                    .addComponent(jTextServicioAlo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel19)
+                    .addComponent(jTextIdCiudadDes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel27))
+                .addGap(29, 29, 29)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
                     .addComponent(jTextCiudadAlo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel26))
+                .addGap(28, 28, 28)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel7)
+                    .addComponent(jTextTipoAlo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel22)
+                    .addComponent(jLabel25)
                     .addComponent(jLabel17)
                     .addComponent(jTextFechaIng, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(29, 29, 29)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel7)
-                    .addComponent(jTextTipoAlo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel18)
-                    .addComponent(jTextFechaEgr, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(28, 28, 28)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel8)
-                    .addComponent(jTextCostoAlo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(30, 30, 30)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel9)
-                    .addComponent(jTextServicioAlo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 78, Short.MAX_VALUE)
+                    .addComponent(jTextCostoAlo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel24)
+                    .addComponent(jLabel18)
+                    .addComponent(jTextFechaEgr, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel23))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 79, Short.MAX_VALUE)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jbAgregarAlo)
                     .addComponent(jbModificarAlo)
                     .addComponent(jbEliminarAlo)
                     .addComponent(jbSalirAlo)
-                    .addComponent(jbLimpiarAlo))
+                    .addComponent(jbLimpiarAlo)
+                    .addComponent(jbSeleccionarDeTabla))
                 .addGap(80, 80, 80))
         );
 
@@ -932,10 +1043,65 @@ public class PanelAdmin2 extends javax.swing.JPanel {
     }//GEN-LAST:event_jTextCiudadAloActionPerformed
 
     private void jbModificarAloActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbModificarAloActionPerformed
-        //Voy a salvar el valor en la fila de la columna ID
-        //Usare el ID para buscar el alojamiento y posterior se lo asigno a un nuevo objeto alojamiento
-        //
-        limpiarAlojamiento();
+        //Para modificar tendra que mostrar id en ciudad (listo) y rescatar los dos primero caracteres
+        //de ciudad siendo el ID para buscar la ciudad y completar el alojamiento nuevo
+        //una vez teniendo el alojamiento a cada valor del mismo se lo pasamos a los
+        //jTextField respectivos para poder modificar
+        
+        try {
+            int idCiudad = Integer.parseInt(jTextIdCiudadDes.getText());
+            String nombre = jTextCiudadAlo.getText();//innecesario para AgregarAlojamiento
+            String tipoAlo = jTextTipoAlo.getText();
+            String costoAlo = jTextCostoAlo.getText();
+            String servicioAlo = jTextServicioAlo.getText();
+            String fechaIng = jTextFechaIng.getText();
+            String fechaEgr = jTextFechaEgr.getText();
+
+            // Verificar si hay campos vacíos
+            if ( jTextIdCiudadDes.getText().isEmpty() || tipoAlo.isEmpty() || costoAlo.isEmpty() || fechaIng.isEmpty() || fechaEgr.isEmpty()) {
+                JOptionPane.showMessageDialog(this, "Campo Obligatorio vacio");
+                return;
+            }
+
+            // Dar formato a las fechas que se ingresan por los campos de fecha
+            DateTimeFormatter formato = DateTimeFormatter.ofPattern("yyyy-MM-dd"); // Formato en el que se deben ingresar las fechas
+
+            LocalDate fecha1 = null;
+            LocalDate fecha2 = null;
+            double costoA = 0.0;
+            Ciudad ciudadDesMod = buscarCiuModData.buscarCiudadParaLista(idCiudad);
+
+            try {
+                // Convierte las cadenas en objetos LocalDate
+                fecha1 = LocalDate.parse(fechaIng, formato);
+                fecha2 = LocalDate.parse(fechaEgr, formato);
+                // Convierte el costo a tipo double
+                costoA = Double.parseDouble(costoAlo);
+            } catch (DateTimeParseException e) {
+                // Excepción cuando no se ingresa el formato correcto
+                JOptionPane.showMessageDialog(this, "El formato de la fecha es incorrecto");
+                return; // Sale del método si hay un error en el formato de la fecha
+            }
+
+            if (alojamientoMod == null) {
+                // Crear un objeto Alojamiento con los datos ingresados
+                //nombre debe ser un objeto tipo ciudad
+                Alojamiento alojamientoMod = new Alojamiento(fecha1, fecha2, true, servicioAlo, costoA, ciudadDesMod, tipoAlo);
+                System.out.println(alojamientoMod);//si lo imprime
+                aloModData.modificarAlojamiento(alojamientoMod); //no realiza la modificacion
+            }
+            //se vuelven a habilitar una vez terminada la modificacion
+            jTextIdCiudadDes.setEnabled(true);
+            jTextCiudadAlo.setEnabled(true);
+            cargarAlojamientos();
+            limpiarAlojamiento();
+
+        } catch (NumberFormatException ex) {
+            JOptionPane.showMessageDialog(this, "Los campos solo deben contener números");
+        } catch (IllegalArgumentException ex) {
+            JOptionPane.showMessageDialog(this, "Error en los datos ingresados");//ya sea por el formato o el costo que debe ser un double
+        }
+       
         
     }//GEN-LAST:event_jbModificarAloActionPerformed
 
@@ -1024,38 +1190,58 @@ public class PanelAdmin2 extends javax.swing.JPanel {
     }//GEN-LAST:event_jbEliminarCiuActionPerformed
 
     private void jbAgregarAloActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbAgregarAloActionPerformed
-        //dado los valores ingresados en los textfield se deben agregar a la tabla y guardar en el sql
-        
-        try{
-        
-        String nombre = jTextCiudadAlo.getText();
-        String tipoAlo = jTextTipoAlo.getText();
-        String costoAlo = jTextCostoAlo.getText();
-        String servicioAlo = jTextServicioAlo.getText();
-        String fechaIng = jTextFechaIng.getText();
-        String fechaEgr = jTextFechaEgr.getText();
-        //necesito asociar el nombre a una ciudad
-        if(nombre.isEmpty()||tipoAlo.isEmpty() || costoAlo.isEmpty() || servicioAlo.isEmpty()||fechaIng.isEmpty()||fechaEgr.isEmpty()){
-            JOptionPane.showMessageDialog(this, "No puede haber campos vacios");
-            return;
-        
+
+        try {
+            int idCiudad = Integer.parseInt(jTextIdCiudadDes.getText());
+            String nombre = jTextCiudadAlo.getText();//innecesario para AgregarAlojamiento
+            String tipoAlo = jTextTipoAlo.getText();
+            String costoAlo = jTextCostoAlo.getText();
+            String servicioAlo = jTextServicioAlo.getText();
+            String fechaIng = jTextFechaIng.getText();
+            String fechaEgr = jTextFechaEgr.getText();
+
+            // Verificar si hay campos vacíos
+            if ( jTextIdCiudadDes.getText().isEmpty() || tipoAlo.isEmpty() || costoAlo.isEmpty() || fechaIng.isEmpty() || fechaEgr.isEmpty()) {
+                JOptionPane.showMessageDialog(this, "Campo Obligatorio vacio");
+                return;
+            }
+
+            // Dar formato a las fechas que se ingresan por los campos de fecha
+            DateTimeFormatter formato = DateTimeFormatter.ofPattern("yyyy-MM-dd"); // Formato en el que se deben ingresar las fechas
+
+            LocalDate fecha1 = null;
+            LocalDate fecha2 = null;
+            double costoA = 0.0;
+            Ciudad ciudadDes = buscarCiuData.buscarCiudadParaLista(idCiudad);
+
+            try {
+                // Convierte las cadenas en objetos LocalDate
+                fecha1 = LocalDate.parse(fechaIng, formato);
+                fecha2 = LocalDate.parse(fechaEgr, formato);
+                // Convierte el costo a tipo double
+                costoA = Double.parseDouble(costoAlo);
+            } catch (DateTimeParseException e) {
+                // Excepción cuando no se ingresa el formato correcto
+                JOptionPane.showMessageDialog(this, "El formato de la fecha es incorrecto");
+                return; // Sale del método si hay un error en el formato de la fecha
+            }
+
+            if (alojamientonew == null) {
+                // Crear un objeto Alojamiento con los datos ingresados
+                //nombre debe ser un objeto tipo ciudad
+                Alojamiento alojamientonew = new Alojamiento(fecha1, fecha2, true, servicioAlo, costoA, ciudadDes, tipoAlo);
+                
+                aloData.guardarAlojamiento(alojamientonew);
+            }
+            cargarAlojamientos();
+            limpiarAlojamiento();
+
+        } catch (NumberFormatException ex) {
+            JOptionPane.showMessageDialog(this, "Los campos solo deben contener números");
+        } catch (IllegalArgumentException ex) {
+            JOptionPane.showMessageDialog(this, "Error en los datos ingresados");//ya sea por el formato o el costo que debe ser un double
         }
-        
-        
-        if(alojamientonew==null){
-             //ver como hacer con fechaIng que debe ser LocalDate y nombre debe ser una ciudadDest de tipo ciudad
-            //alojamientonew= new Alojamiento(fechaIng, fechaEgr, true, servicioAlo, costoAlo, nombre, tipoAlo);
-            aloData.guardarAlojamiento(alojamientonew);
-        }
-        
-        }catch(IllegalArgumentException ex){//creo que no es el catch correcto
-            //cambio "NumerFormatException" por "IllegalArgumentException"
-            //no sale ningun msj
-            JOptionPane.showMessageDialog(this, "Los campos solo reciben letras");
-        
-        }
-        cargarAlojamientos();        
-        limpiarAlojamiento();
+
     }//GEN-LAST:event_jbAgregarAloActionPerformed
 
     private void jbEliminarAloActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbEliminarAloActionPerformed
@@ -1258,6 +1444,44 @@ public class PanelAdmin2 extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextFechaEgrActionPerformed
 
+    private void jTextIdCiudadDesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextIdCiudadDesActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextIdCiudadDesActionPerformed
+
+    private void jTextFechaIngActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFechaIngActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextFechaIngActionPerformed
+
+    private void jbSeleccionarDeTablaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbSeleccionarDeTablaActionPerformed
+        
+        int indice = jtAlojamientos.getSelectedRow();//creo una variable indice y le doy el valor de la fila seleccionada
+        //el valor que este en la columna ciudad lo necesito por el id al comienzo
+        String idAloj = jtAlojamientos.getValueAt(indice, 0).toString();
+        String ciudad = jtAlojamientos.getValueAt(indice, 1).toString();
+        int idCiuDes;//seria la id de la ciudadDes
+        //busco la posicion de ")"
+        int indiceParentesis = ciudad.indexOf(")");
+        //extraigo hasta")"
+        String parteId = ciudad.substring(0, indiceParentesis);
+        //transformo lo extraido en un int
+        idCiuDes = Integer.parseInt(parteId);
+        //creo una variable int y le asigno el valor de idAloj
+        int idAlojInt = Integer.parseInt(idAloj);
+        aloSelec = aloSelecData.buscarAlojamiento(idAlojInt);
+        if (aloSelec != null) {
+            jTextIdCiudadDes.setText(parteId);
+            jTextIdCiudadDes.setEnabled(false);//una vez seteados no se podran modificar
+            jTextCiudadAlo.setText(ciudad);
+            jTextCiudadAlo.setEnabled(false);//una vez seteados no se podran modificar
+            jTextTipoAlo.setText(aloSelec.getTipo());
+            jTextCostoAlo.setText(String.valueOf(aloSelec.getImporteDiario()));
+            jTextServicioAlo.setText(aloSelec.getServicio());
+            jTextFechaIng.setText(aloSelec.getFechaIn().toString());
+            jTextFechaEgr.setText(aloSelec.getFechaOn().toString());
+        }
+        
+    }//GEN-LAST:event_jbSeleccionarDeTablaActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JRadioButton botonEstadoCiudad;
@@ -1271,7 +1495,16 @@ public class PanelAdmin2 extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
+    private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel20;
+    private javax.swing.JLabel jLabel21;
+    private javax.swing.JLabel jLabel22;
+    private javax.swing.JLabel jLabel23;
+    private javax.swing.JLabel jLabel24;
+    private javax.swing.JLabel jLabel25;
+    private javax.swing.JLabel jLabel26;
+    private javax.swing.JLabel jLabel27;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -1298,6 +1531,7 @@ public class PanelAdmin2 extends javax.swing.JPanel {
     private javax.swing.JTextField jTextCostoAlo;
     private javax.swing.JTextField jTextFechaEgr;
     private javax.swing.JTextField jTextFechaIng;
+    private javax.swing.JTextField jTextIdCiudadDes;
     private javax.swing.JTextField jTextPais;
     private javax.swing.JTextField jTextPrecioTransp;
     private javax.swing.JTextField jTextProvincia;
@@ -1325,6 +1559,7 @@ public class PanelAdmin2 extends javax.swing.JPanel {
     private javax.swing.JButton jbSalirCiu;
     private javax.swing.JButton jbSalirPaq;
     private javax.swing.JButton jbSalirTran;
+    private javax.swing.JButton jbSeleccionarDeTabla;
     private javax.swing.JTable jtAlojamientos;
     private javax.swing.JTable jtCiudades;
     private javax.swing.JTable jtPaquetes;
@@ -1466,10 +1701,13 @@ private void armarCabeceraTabla4() {
     }
         
         private void limpiarAlojamiento() {
+        jTextIdCiudadDes.setText("");
         jTextCiudadAlo.setText("");
         jTextTipoAlo.setText("");
         jTextCostoAlo.setText("");
         jTextServicioAlo.setText("");
+        jTextFechaIng.setText("");
+        jTextFechaEgr.setText("");
     }
             
         private void limpiarTransporte() {
