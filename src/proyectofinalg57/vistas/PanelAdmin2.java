@@ -64,6 +64,9 @@ public class PanelAdmin2 extends javax.swing.JPanel {
     //paraBorrarAlojamiento
     private AlojamientoData borrarAloData = new AlojamientoData();
     private AlojamientoData buscarAloData = new AlojamientoData();
+    //para modificarTransporte
+    private Pasaje tranSelec = new Pasaje();
+    private PasajeData tranSelecData = new PasajeData();
     
     public PanelAdmin2() {
         initComponents();
@@ -164,6 +167,9 @@ public class PanelAdmin2 extends javax.swing.JPanel {
         jbEliminarTran = new javax.swing.JButton();
         jbSalirTran = new javax.swing.JButton();
         jbLimpiarTran = new javax.swing.JButton();
+        jLabel28 = new javax.swing.JLabel();
+        jTextIDAlojamiento = new javax.swing.JTextField();
+        jbSelecTran = new javax.swing.JButton();
         jPanel5 = new javax.swing.JPanel();
         jScrollPane4 = new javax.swing.JScrollPane();
         jtPaquetes = new javax.swing.JTable();
@@ -377,13 +383,13 @@ public class PanelAdmin2 extends javax.swing.JPanel {
 
         jtAlojamientos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
             },
             new String [] {
-                "Ciudad", "Tipo", "Costo Diario", "Servicios"
+                "ID", "Ciudad", "Tipo", "Costo Diario", "Servicios"
             }
         ));
         jScrollPane2.setViewportView(jtAlojamientos);
@@ -645,13 +651,13 @@ public class PanelAdmin2 extends javax.swing.JPanel {
 
         jtTransportes.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
             },
             new String [] {
-                "Transporte", "Precio", "Ciudad de Origen"
+                "ID", "Transporte", "Precio", "Ciudad de Origen"
             }
         ));
         jScrollPane3.setViewportView(jtTransportes);
@@ -715,6 +721,21 @@ public class PanelAdmin2 extends javax.swing.JPanel {
             }
         });
 
+        jLabel28.setText("ID Alojamiento:");
+
+        jTextIDAlojamiento.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextIDAlojamientoActionPerformed(evt);
+            }
+        });
+
+        jbSelecTran.setText("Seleccionar");
+        jbSelecTran.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbSelecTranActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
@@ -726,28 +747,34 @@ public class PanelAdmin2 extends javax.swing.JPanel {
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addGap(22, 22, 22)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(jLabel10, javax.swing.GroupLayout.DEFAULT_SIZE, 120, Short.MAX_VALUE)
+                        .addComponent(jLabel11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jLabel28)
+                    .addComponent(jbLimpiarTran))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jLabel10, javax.swing.GroupLayout.DEFAULT_SIZE, 120, Short.MAX_VALUE)
-                            .addComponent(jLabel11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel12, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jTextTipoTransp)
-                            .addComponent(jTextPrecioTransp)
-                            .addComponent(jTextCiudadOrigenTransp, javax.swing.GroupLayout.DEFAULT_SIZE, 220, Short.MAX_VALUE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addComponent(jbLimpiarTran)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 95, Short.MAX_VALUE)
                         .addComponent(jbAgregarTran)
-                        .addGap(101, 101, 101)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 56, Short.MAX_VALUE)
+                        .addComponent(jbSelecTran)
+                        .addGap(77, 77, 77)
                         .addComponent(jbModificarTran)
-                        .addGap(134, 134, 134)))
-                .addComponent(jbEliminarTran)
-                .addGap(94, 94, 94)
-                .addComponent(jbSalirTran)
-                .addGap(28, 28, 28))
+                        .addGap(64, 64, 64)
+                        .addComponent(jbEliminarTran)
+                        .addGap(64, 64, 64)
+                        .addComponent(jbSalirTran)
+                        .addGap(28, 28, 28))
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jTextTipoTransp, javax.swing.GroupLayout.DEFAULT_SIZE, 220, Short.MAX_VALUE)
+                            .addComponent(jTextPrecioTransp)
+                            .addComponent(jTextIDAlojamiento))
+                        .addGap(78, 78, 78)
+                        .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jTextCiudadOrigenTransp, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -756,23 +783,26 @@ public class PanelAdmin2 extends javax.swing.JPanel {
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(41, 41, 41)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel12)
+                    .addComponent(jLabel28)
+                    .addComponent(jTextCiudadOrigenTransp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextIDAlojamiento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(54, 54, 54)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel10)
                     .addComponent(jTextTipoTransp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(54, 54, 54)
+                .addGap(52, 52, 52)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel11)
                     .addComponent(jTextPrecioTransp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(52, 52, 52)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel12)
-                    .addComponent(jTextCiudadOrigenTransp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 88, Short.MAX_VALUE)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jbAgregarTran)
                     .addComponent(jbModificarTran)
                     .addComponent(jbEliminarTran)
                     .addComponent(jbSalirTran)
-                    .addComponent(jbLimpiarTran))
+                    .addComponent(jbLimpiarTran)
+                    .addComponent(jbSelecTran))
                 .addGap(75, 75, 75))
         );
 
@@ -1259,6 +1289,7 @@ public class PanelAdmin2 extends javax.swing.JPanel {
 
     private void jbLimpiarTranActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbLimpiarTranActionPerformed
         limpiarTransporte();
+        jTextIDAlojamiento.setEnabled(true);jTextCiudadOrigenTransp.setEnabled(true);
     }//GEN-LAST:event_jbLimpiarTranActionPerformed
 
     private void jbLimpiarPaqActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbLimpiarPaqActionPerformed
@@ -1461,6 +1492,42 @@ public class PanelAdmin2 extends javax.swing.JPanel {
         
     }//GEN-LAST:event_jbSeleccionarDeTablaActionPerformed
 
+    private void jTextIDAlojamientoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextIDAlojamientoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextIDAlojamientoActionPerformed
+
+    private void jbSelecTranActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbSelecTranActionPerformed
+        
+        int indice = jtTransportes.getSelectedRow();//creo una variable indice y le doy el valor de la fila seleccionada
+        //el valor que este en la columna ciudad lo necesito por el id al comienzo
+        String idAloj = jtTransportes.getValueAt(indice, 0).toString();
+        String ciudad = jtTransportes.getValueAt(indice, 3).toString();
+        System.out.println(ciudad);
+        int idCiuOr;//seria la id de la ciudadDes
+        //busco la posicion de ")"
+        int indiceParentesis = ciudad.indexOf(")");
+        //extraigo hasta")"
+        String parteId = ciudad.substring(0, indiceParentesis);
+        //transformo lo extraido en un int
+        idCiuOr = Integer.parseInt(parteId);
+        //creo una variable int y le asigno el valor de idAloj
+        int idAlojInt = Integer.parseInt(idAloj);
+        tranSelec = tranSelecData.buscarPasaje(idAlojInt);//si la encuentra
+        System.out.println(tranSelec);//imprime y tira ciudad no encontrada
+        if (tranSelec != null) {//no la pasa a los textFiel 
+            jTextIDAlojamiento.setText(String.valueOf(tranSelec.getIdPasaje()));
+            jTextIDAlojamiento.setEnabled(false);//una vez seteados no se podran modificar
+            jTextCiudadOrigenTransp.setText(ciudad);
+            jTextCiudadOrigenTransp.setEnabled(false);//una vez seteados no se podran modificar
+            jTextTipoTransp.setText(tranSelec.getTipoTransporte());
+            jTextPrecioTransp.setText(String.valueOf(tranSelec.getImporte()));
+            
+        }
+        
+        
+        limpiarTransporte();
+    }//GEN-LAST:event_jbSelecTranActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JRadioButton botonEstadoCiudad;
@@ -1484,6 +1551,7 @@ public class PanelAdmin2 extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel25;
     private javax.swing.JLabel jLabel26;
     private javax.swing.JLabel jLabel27;
+    private javax.swing.JLabel jLabel28;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -1510,6 +1578,7 @@ public class PanelAdmin2 extends javax.swing.JPanel {
     private javax.swing.JTextField jTextCostoAlo;
     private javax.swing.JTextField jTextFechaEgr;
     private javax.swing.JTextField jTextFechaIng;
+    private javax.swing.JTextField jTextIDAlojamiento;
     private javax.swing.JTextField jTextIdCiudadDes;
     private javax.swing.JTextField jTextPais;
     private javax.swing.JTextField jTextPrecioTransp;
@@ -1538,6 +1607,7 @@ public class PanelAdmin2 extends javax.swing.JPanel {
     private javax.swing.JButton jbSalirCiu;
     private javax.swing.JButton jbSalirPaq;
     private javax.swing.JButton jbSalirTran;
+    private javax.swing.JButton jbSelecTran;
     private javax.swing.JButton jbSeleccionarDeTabla;
     private javax.swing.JTable jtAlojamientos;
     private javax.swing.JTable jtCiudades;
@@ -1573,6 +1643,7 @@ private void armarCabeceraTabla2() {
     }
 private void armarCabeceraTabla3() {
         ArrayList<Object> filaCabecera = new ArrayList<>();
+        filaCabecera.add("ID");
         filaCabecera.add("Transporte");
         filaCabecera.add("Precio");
         filaCabecera.add("Ciudad de Origen");
@@ -1643,10 +1714,11 @@ private void armarCabeceraTabla4() {
     
     for (Pasaje a : transportes) {
         // Accede a los atributos de Alojamiento y agrega una fila a la tabla
+        int idTransporte = a.getIdPasaje();
         String tipo = a.getTipoTransporte();
         double precio = a.getImporte();
         Ciudad ciudadOrigen = a.getNombreCiudadOrigen();
-        modelo3.addRow(new Object[]{tipo, precio, ciudadOrigen});
+        modelo3.addRow(new Object[]{idTransporte,tipo, precio, ciudadOrigen});
     }
     }
     
@@ -1690,6 +1762,7 @@ private void armarCabeceraTabla4() {
     }
             
         private void limpiarTransporte() {
+        jTextIDAlojamiento.setText("");
         jTextTipoTransp.setText("");
         jTextPrecioTransp.setText("");
         jTextCiudadOrigenTransp.setText("");
