@@ -955,89 +955,60 @@ public class PanelAdmin2 extends javax.swing.JPanel {
     }//GEN-LAST:event_jTextProvinciaActionPerformed
 
     private void jbModificarCiuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbModificarCiuActionPerformed
-        
-        // tira un NullPointerException cuando intento modificar
-        //creo una variable nFilas con la cantidad de filas de la tabla de ciudades
-        int nFilas = jtCiudades.getModel().getRowCount();
-        //nose si el try deberia ir porque lo que se ingresa en general son string
-        try {
-            //verifica si se esta editando una celda en la tabla
-            if (jtCiudades.isEditing()) {
-                //si es asi graba o guarda la edicion para luego revisarla con el for
-                jtCiudades.getCellEditor().stopCellEditing();
+         try {
+            int filaSeleccionada = jtCiudades.getSelectedRow();
+
+            if (filaSeleccionada == -1) {
+                JOptionPane.showMessageDialog(this, "Selecciona una fila para modificar.");
+                return;
             }
+
+            Ciudad ciudadOriginal = new Ciudad();
+
+            ciudadOriginal.setIdCiudad((int) jtCiudades.getValueAt(filaSeleccionada, 0));
+            ciudadOriginal.setNombre((String) jtCiudades.getValueAt(filaSeleccionada, 1));
+            ciudadOriginal.setPais((String) jtCiudades.getValueAt(filaSeleccionada, 2));
+            ciudadOriginal.setProvincia((String) jtCiudades.getValueAt(filaSeleccionada, 3));
+            ciudadOriginal.setEstado((boolean) jtCiudades.getValueAt(filaSeleccionada, 4));
+
+            // Modifica los atributos de la ciudad
             
-            for (int i = 0; i < nFilas; i++) {
-                //la idea es que el for revise fila a fila cada elemento de las columnas
-                //se crea una matriz caja donde se usara cada columna de la misma fila para crear una ciudad
-                    
-                    //int idCiudad = Integer.parseInt(jtCiudades.getModel().getValueAt(i, 0).toString());
-                    //boolean estado = Boolean.parseBoolean(caja[i][4]);
-                    
-                //creo una ciudadbase con los atributos que figuran en cada posicion de la tabla
-                                          //new Ciudad(  nombre  ,    pais   ,        estado          ,  provincia)
-                    Ciudad ciudadOriginal = new Ciudad(caja[i][1], caja[i][2], caja[i][4].equals(true), caja[i][3]);
-                //como en los parametros de ciudad figura antes estado que provincia entonces
-                //estado que esta en la 4ta columna de la tabla la ubico antes q provincia que esta en 3ra columna
-                // instancio una ciudad nueva de tipo ciudad
-                    Ciudad nuevaCiu = new Ciudad();
-//                    int idCiudad = (int) jtCiudades.getModel().getValueAt(i, 0);
-
-//                  String nuevaCiudad = (String) jtCiudades.getModel().getValueAt(i, 0);
-//                  int idCiudad = Integer.parseInt(jtCiudades.getModel().getValueAt(i, 0).toString());
-//                  Probar cual de los dos idCiudad funciona mejor o es correcto
-//                   if (!nuevaCiudad.equals(ciudadOriginal)) {
-//                       modificarCiudad recibe una ciudad
-//                       Ciudad nuevaCiu = new Ciudad ();
-//                      CiudadData.modificarCiudad(idCiudad, nuevaCiudad);
-//                
-//                    }
-                    
-                    //Para el atributo de Nombre de la Ciudad
-                    //tomo el valor nombre de la tabla y se lo almaceno en la variable nueva ciudad
-                    String nuevaCiudad = (String) jtCiudades.getModel().getValueAt(i, 1); // columna 1 es para el nombre de la ciudad
-                    if (!nuevaCiudad.equals(ciudadOriginal.getNombre())) {
-                        nuevaCiu.setNombre(nuevaCiudad);
-                    } else {
-                        // si no hay cambio se mantiene el atributo
-                        nuevaCiu.setNombre(ciudadOriginal.getNombre()); // mantenemos el atributo original
-                    }
-
-                    //Para el atributo de Pais
-                    String nuevoPais = (String) jtCiudades.getModel().getValueAt(i, 2); //j va cambiando segun posicion de tabla
-                    if (!nuevoPais.equals(ciudadOriginal.getPais())) {
-                        nuevaCiu.setPais(nuevoPais);
-                    } else {
-                        nuevaCiu.setPais(ciudadOriginal.getPais()); // se mantiene el mismo atributo
-                    }
-                    
-                    //Para el atributo Provincia
-                    String nuevaProvincia = (String) jtCiudades.getModel().getValueAt(i, 3); //3 segun tabla es provincia
-                    if (!nuevaProvincia.equals(ciudadOriginal.getProvincia())) {
-                        nuevaCiu.setProvincia(nuevaProvincia);
-                    } else {
-                        nuevaCiu.setProvincia(ciudadOriginal.getProvincia()); // se mantiene el mismo atributo
-                    }
-                    
-                    //Para el atributo Estado
-                    Boolean nuevoEstado = (Boolean) jtCiudades.getModel().getValueAt(i, 4); //j va cambiando segun posicion de tabla
-                    if (!nuevoEstado.equals(ciudadOriginal.isEstado())) {
-                        nuevaCiu.setEstado(nuevoEstado);
-                    } else {
-                        nuevaCiu.setEstado(ciudadOriginal.isEstado()); // se mantiene el mismo atributo
-                    }
-                //llamo a ciuDataMod que es un CiudadData, con el modificador y le paso la nueva ciudad armada nuevaCiu
-                ciuDataMod.modificarCiudad(nuevaCiu);
-                //talvez nuevaCiu deba ser un arreglo String[]={nombre,pais,estado,provincia} y luego transformarlo a Ciudad
+            String nuevoNombre = obtenerNuevoValor("Nuevo nombre de la ciudad:", ciudadOriginal.getNombre());
+            if (nuevoNombre != null) {
+                ciudadOriginal.setNombre(nuevoNombre);
             }
-        //creo que el catch no deberia ir
+
+            String nuevoPais = obtenerNuevoValor("Nuevo país:", ciudadOriginal.getPais());
+            if (nuevoPais != null) {
+                ciudadOriginal.setPais(nuevoPais);
+            }
+
+            String nuevaProvincia = obtenerNuevoValor("Nueva provincia:", ciudadOriginal.getProvincia());
+            if (nuevaProvincia != null) {
+                ciudadOriginal.setProvincia(nuevaProvincia);
+            }
+
+            boolean nuevoEstado = (boolean) jtCiudades.getValueAt(filaSeleccionada, 4);
+
+// Verifica si se ha realizado un cambio en el estado
+            if (nuevoEstado != ciudadOriginal.isEstado()) {
+                ciudadOriginal.setEstado(nuevoEstado);
+            }
+
+            // Luego, actualiza la base de datos con la ciudad modificada
+            ciuDataMod.modificarCiudad(ciudadOriginal);
+            limpiarCiudad();
         } catch (NumberFormatException ex) {
-            JOptionPane.showMessageDialog(this, "Ingrese solo números");
+            JOptionPane.showMessageDialog(this, "Ingrese solo números.");
         }
-        cargarCiudades();
-        limpiarCiudad();
+       
     }//GEN-LAST:event_jbModificarCiuActionPerformed
 
+    
+     private String obtenerNuevoValor(String mensaje, String valorActual) {
+
+        return valorActual;
+    }
     private void jTextCiudadAloActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextCiudadAloActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextCiudadAloActionPerformed
