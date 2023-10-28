@@ -1049,7 +1049,15 @@ public class PanelAdmin2 extends javax.swing.JPanel {
         //jTextField respectivos para poder modificar
         
         try {
+            //indice de tabla
+            int selectedRow = jtAlojamientos.getSelectedRow();
+            //creo un objeto en base al valor de la tabla modelo2 de columna 0 y fila seleccionada
+            Object valorDTabla = modelo2.getValueAt(selectedRow, 0);
+            //transformo ese valor en un int
+            int idAloja = Integer.parseInt(valorDTabla.toString());
+            
             int idCiudad = Integer.parseInt(jTextIdCiudadDes.getText());
+            
             String nombre = jTextCiudadAlo.getText();//innecesario para AgregarAlojamiento
             String tipoAlo = jTextTipoAlo.getText();
             String costoAlo = jTextCostoAlo.getText();
@@ -1086,9 +1094,8 @@ public class PanelAdmin2 extends javax.swing.JPanel {
             if (alojamientoMod == null) {
                 // Crear un objeto Alojamiento con los datos ingresados
                 //nombre debe ser un objeto tipo ciudad
-                Alojamiento alojamientoMod = new Alojamiento(fecha1, fecha2, true, servicioAlo, costoA, ciudadDesMod, tipoAlo);
-                System.out.println(alojamientoMod);//si lo imprime
-                aloModData.modificarAlojamiento(alojamientoMod); //no realiza la modificacion
+                Alojamiento alojamientoMod = new Alojamiento(idAloja ,fecha1, fecha2, true, servicioAlo, costoA, ciudadDesMod, tipoAlo);
+                aloModData.modificarAlojamiento(alojamientoMod);
             }
             //se vuelven a habilitar una vez terminada la modificacion
             jTextIdCiudadDes.setEnabled(true);
