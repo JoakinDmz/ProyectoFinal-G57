@@ -1514,7 +1514,7 @@ public class PanelAdmin2 extends javax.swing.JPanel {
         int idAlojInt = Integer.parseInt(idAloj);
         tranSelec = tranSelecData.buscarPasaje(idAlojInt);//si la encuentra
         System.out.println(tranSelec);//imprime y tira ciudad no encontrada
-        if (tranSelec != null) {//no la pasa a los textFiel 
+        if (tranSelec != null) {
             jTextIDAlojamiento.setText(String.valueOf(tranSelec.getIdPasaje()));
             jTextIDAlojamiento.setEnabled(false);//una vez seteados no se podran modificar
             jTextCiudadOrigenTransp.setText(ciudad);
@@ -1525,7 +1525,7 @@ public class PanelAdmin2 extends javax.swing.JPanel {
         }
         
         
-        limpiarTransporte();
+        
     }//GEN-LAST:event_jbSelecTranActionPerformed
 
 
