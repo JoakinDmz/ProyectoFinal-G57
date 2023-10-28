@@ -1249,7 +1249,7 @@ public class PanelAdmin2 extends javax.swing.JPanel {
         //necesito scar ese valor dado el indice de seleccion en la tabla
         int indice = jtAlojamientos.getSelectedRow();//creo una variable indice y le doy el valor de la fila seleccionada
         //dado el indice creo una variable donde le designo el valor en la posicion de indice y columna 0 (ID)
-        int idalojamiento = Integer.parseInt(jtCiudades.getValueAt(indice,0).toString());
+        int idalojamiento = Integer.parseInt(jtAlojamientos.getValueAt(indice,0).toString());
 
         //teniendo el idalojamiento lo uso para borrar el alojamiento 
         borrarAloData.eliminarAlojamiento(idalojamiento);//le paso el valor tomado del alo seleccionado
@@ -1276,6 +1276,7 @@ public class PanelAdmin2 extends javax.swing.JPanel {
 
     private void jbLimpiarAloActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbLimpiarAloActionPerformed
         limpiarAlojamiento();
+        jTextIdCiudadDes.setEnabled(true);jTextCiudadAlo.setEnabled(true);
     }//GEN-LAST:event_jbLimpiarAloActionPerformed
 
     private void jbLimpiarTranActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbLimpiarTranActionPerformed
