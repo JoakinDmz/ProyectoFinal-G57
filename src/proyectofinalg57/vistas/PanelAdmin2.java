@@ -68,6 +68,7 @@ public class PanelAdmin2 extends javax.swing.JPanel {
     private Pasaje tranSelec = new Pasaje();
     private PasajeData tranSelecData = new PasajeData();
     private Pasaje pasajenew = null;
+    private Pasaje transporteMod = null;
     
     public PanelAdmin2() {
         initComponents();
@@ -1364,7 +1365,53 @@ public class PanelAdmin2 extends javax.swing.JPanel {
     }//GEN-LAST:event_jbAgregarTranActionPerformed
 
     private void jbModificarTranActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbModificarTranActionPerformed
-        limpiarTransporte();
+        try {
+            //indice de tabla
+            int selectedRow = jtTransportes.getSelectedRow();
+            //creo un objeto en base al valor de la tabla modelo2 de columna 0 y fila seleccionada
+            Object valorDTabla = modelo3.getValueAt(selectedRow, 0);
+            //transformo ese valor en un int
+            int idTran = Integer.parseInt(valorDTabla.toString());
+            
+            int idCiudad = Integer.parseInt(jTIDciudadOrigen.getText());
+            
+            
+            String tipoTran = jTextTipoTransp.getText();
+            String costoTran = jTextPrecioTransp.getText();
+            
+
+            // Verificar si hay campos vacíos
+            if (tipoTran.isEmpty() || costoTran.isEmpty()) {
+                JOptionPane.showMessageDialog(this, "Campo Obligatorio vacio");
+                return;
+            }
+
+            
+            double costoT = 0.0;
+            Ciudad ciuOrigen = cData.buscarCiudadParaLista(idCiudad);
+
+            
+            costoT = Double.parseDouble(costoTran);
+            
+
+            if (transporteMod == null) {
+                // Crear un objeto Alojamiento con los datos ingresados
+                //nombre debe ser un objeto tipo ciudad
+               Pasaje transporteMod = new Pasaje(idTran, tipoTran, costoT, ciuOrigen, true);
+                tData.modificarPasaje(transporteMod);
+            }
+            //se vuelven a habilitar una vez terminada la modificacion
+            jTextCiudadOrigenTransp.setEnabled(true);
+            jTextIDPasaje.setEnabled(true);
+            jTIDciudadOrigen.setEnabled(true);
+            
+            cargarTransportes();
+            limpiarTransporte();
+
+        
+        } catch (IllegalArgumentException ex) {
+            JOptionPane.showMessageDialog(this, "Error en los datos ingresados");//ya sea por el formato o el costo que debe ser un double
+        }
     }//GEN-LAST:event_jbModificarTranActionPerformed
 
     private void jbEliminarTranActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbEliminarTranActionPerformed
@@ -1395,7 +1442,7 @@ public class PanelAdmin2 extends javax.swing.JPanel {
 
     private void jbLimpiarTranActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbLimpiarTranActionPerformed
         limpiarTransporte();
-        jTextIDPasaje.setEnabled(true);jTextCiudadOrigenTransp.setEnabled(true);
+        jTextIDPasaje.setEnabled(true);jTextCiudadOrigenTransp.setEnabled(true);jTIDciudadOrigen.setEnabled(true);
     }//GEN-LAST:event_jbLimpiarTranActionPerformed
 
     private void jbLimpiarPaqActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbLimpiarPaqActionPerformed
@@ -1612,19 +1659,21 @@ public class PanelAdmin2 extends javax.swing.JPanel {
         //el valor que este en la columna ciudad lo necesito por el id al comienzo
         String idAloj = jtTransportes.getValueAt(indice, 0).toString();
         String ciudad = jtTransportes.getValueAt(indice, 3).toString();
-        System.out.println(ciudad);
+        
         int idCiuOr;//seria la id de la ciudadDes
         //busco la posicion de ")"
         int indiceParentesis = ciudad.indexOf(")");
         //extraigo hasta")"
-        String parteId = ciudad.substring(0, indiceParentesis);
+        String parteId = ciudad.substring(0, indiceParentesis);//ID Ciudad de Origen
         //transformo lo extraido en un int
         idCiuOr = Integer.parseInt(parteId);
         //creo una variable int y le asigno el valor de idAloj
         int idAlojInt = Integer.parseInt(idAloj);
         tranSelec = tranSelecData.buscarPasaje(idAlojInt);//si la encuentra
-        System.out.println(tranSelec);//imprime y tira ciudad no encontrada
+        
         if (tranSelec != null) {
+            jTIDciudadOrigen.setText(parteId);
+            jTIDciudadOrigen.setEnabled(false);
             jTextIDPasaje.setText(String.valueOf(tranSelec.getIdPasaje()));
             jTextIDPasaje.setEnabled(false);//una vez seteados no se podran modificar
             jTextCiudadOrigenTransp.setText(ciudad);
