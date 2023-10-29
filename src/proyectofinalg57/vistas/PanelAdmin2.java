@@ -1325,13 +1325,13 @@ public class PanelAdmin2 extends javax.swing.JPanel {
 
     private void jbAgregarTranActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbAgregarTranActionPerformed
        try{
-        int idCiudad = Integer.parseInt(jTIDciudadOrigen.getText());
+        String idCiudad = jTIDciudadOrigen.getText();
         
         String tipoPasaje = jTextTipoTransp.getText();
         String precioPasaje = jTextPrecioTransp.getText();
         String ciuOrigen = jTextCiudadOrigenTransp.getText();
         
-        if (jTIDciudadOrigen.getText().isEmpty() || tipoPasaje.isEmpty() || precioPasaje.isEmpty()){
+        if (idCiudad.isEmpty() || tipoPasaje.isEmpty() || precioPasaje.isEmpty()){
                 JOptionPane.showMessageDialog(this, "Campo Obligatorio vacio");
                 return;
             }
@@ -1339,7 +1339,8 @@ public class PanelAdmin2 extends javax.swing.JPanel {
         
         double costoT = 0.0;
         costoT = Double.parseDouble(precioPasaje);
-        Ciudad ciudadOr = buscarCiuData.buscarCiudadParaLista(idCiudad);
+        int IDciudad = Integer.parseInt(idCiudad);
+        Ciudad ciudadOr = buscarCiuData.buscarCiudadParaLista(IDciudad);
         
         
         if (pasajenew == null){
@@ -1362,6 +1363,7 @@ public class PanelAdmin2 extends javax.swing.JPanel {
            JOptionPane.showMessageDialog(this, "Error en los datos ingresados");
                    
        }
+
     }//GEN-LAST:event_jbAgregarTranActionPerformed
 
     private void jbModificarTranActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbModificarTranActionPerformed
