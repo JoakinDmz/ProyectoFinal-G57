@@ -1104,8 +1104,7 @@ public class PanelAdmin2 extends javax.swing.JPanel {
             cargarAlojamientos();
             limpiarAlojamiento();
 
-        } catch (NumberFormatException ex) {
-            JOptionPane.showMessageDialog(this, "Los campos solo deben contener números");
+        
         } catch (IllegalArgumentException ex) {
             JOptionPane.showMessageDialog(this, "Error en los datos ingresados");//ya sea por el formato o el costo que debe ser un double
         }
@@ -1371,10 +1370,13 @@ public class PanelAdmin2 extends javax.swing.JPanel {
     }//GEN-LAST:event_jTextServicioAloKeyTyped
 
     private void jTextCostoAloKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextCostoAloKeyTyped
+
         char c = evt.getKeyChar();
-    if (!(Character.isDigit(c) || (c == KeyEvent.VK_BACK_SPACE) || (c == KeyEvent.VK_DELETE))) {
-        evt.consume(); // Esto consume el evento y evita que el carácter ingresado se muestre en el campo de texto.
-    }
+
+        if (!(Character.isDigit(c) || c == '.' || c == ',' || c == KeyEvent.VK_BACK_SPACE || c == KeyEvent.VK_DELETE)) {
+            evt.consume();
+        }
+
     }//GEN-LAST:event_jTextCostoAloKeyTyped
 
     private void jTextTipoTranspKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextTipoTranspKeyTyped
@@ -1390,9 +1392,10 @@ public class PanelAdmin2 extends javax.swing.JPanel {
 
     private void jTextPrecioTranspKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextPrecioTranspKeyTyped
         char c = evt.getKeyChar();
-    if (!(Character.isDigit(c) || (c == KeyEvent.VK_BACK_SPACE) || (c == KeyEvent.VK_DELETE))) {
-        evt.consume(); // Esto consume el evento y evita que el carácter ingresado se muestre en el campo de texto.
-    }
+
+        if (!(Character.isDigit(c) || c == '.' || c == ',' || c == KeyEvent.VK_BACK_SPACE || c == KeyEvent.VK_DELETE)) {
+            evt.consume();
+        }
     }//GEN-LAST:event_jTextPrecioTranspKeyTyped
 
     private void jTextCiudadOrigenTranspKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextCiudadOrigenTranspKeyTyped
