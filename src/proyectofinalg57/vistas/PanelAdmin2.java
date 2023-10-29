@@ -69,6 +69,8 @@ public class PanelAdmin2 extends javax.swing.JPanel {
     private PasajeData tranSelecData = new PasajeData();
     private Pasaje pasajenew = null;
     private Pasaje transporteMod = null;
+    //para agregar paquete
+    private Paquete paquetenew = null;
     
     public PanelAdmin2() {
         initComponents();
@@ -1191,7 +1193,42 @@ public class PanelAdmin2 extends javax.swing.JPanel {
     }//GEN-LAST:event_jbSalirAloActionPerformed
 
     private void jbAgregarPaqActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbAgregarPaqActionPerformed
+        
+        try{
+        String idCiuOr =jTextCiuOrgPaq.getText();
+        String idCiuDest = jTextCiuDesPaq.getText();
+        String idalojamiento = jTextAlojamientoPaq.getText();
+        String idtransporte = jTextTransportePaq.getText();
+
+        if(idCiuOr.isEmpty()|| idCiuDest.isEmpty() || idalojamiento.isEmpty() || idtransporte.isEmpty()){
+            JOptionPane.showMessageDialog(this, "Campo Obligatorio vacio");
+                return;
+
+        }
+        //transformar los String en INT para poder usar en los metodos y pasar a PAQUETE()
+        int idCiuOri = Integer.parseInt(idCiuOr);
+        int idCiuDesti = Integer.parseInt(idCiuDest);
+        int idAlojamiento = Integer.parseInt(idalojamiento);
+        int idTransporte = Integer.parseInt(idtransporte);
+        Ciudad ciudadOr = cData.buscarCiudadParaLista(idCiuOri);//corregir
+        Ciudad ciudadDest = cData.buscarCiudadParaLista(idCiuDesti);
+        Alojamiento alo = aloData.buscarAlojamiento(idAlojamiento);
+        Pasaje pas = tData.buscarPasaje(idTransporte);
+
+        if (paquetenew == null){
+            Paquete paquetenew = new Paquete(ciudadOr, ciudadDest, alo, pas);
+            pData.guardarPaquete(paquetenew);
+
+        }
+
+        cargarPaquetes();
         limpiarPaquetes();
+
+
+       }catch(IllegalArgumentException e){
+           JOptionPane.showMessageDialog(this, "Error en los datos ingresados");
+
+       }
         
     }//GEN-LAST:event_jbAgregarPaqActionPerformed
 
@@ -1257,8 +1294,8 @@ public class PanelAdmin2 extends javax.swing.JPanel {
     private void jbAgregarAloActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbAgregarAloActionPerformed
 
         try {
-            int idCiudad = Integer.parseInt(jTextIdCiudadDes.getText());
-            String nombre = jTextCiudadAlo.getText();//innecesario para AgregarAlojamiento
+            String idCiudad = jTextIdCiudadDes.getText();
+//            String nombre = jTextCiudadAlo.getText();//innecesario para AgregarAlojamiento
             String tipoAlo = jTextTipoAlo.getText();
             String costoAlo = jTextCostoAlo.getText();
             String servicioAlo = jTextServicioAlo.getText();
@@ -1266,7 +1303,7 @@ public class PanelAdmin2 extends javax.swing.JPanel {
             String fechaEgr = jTextFechaEgr.getText();
 
             // Verificar si hay campos vacíos
-            if ( jTextIdCiudadDes.getText().isEmpty() || tipoAlo.isEmpty() || costoAlo.isEmpty() || fechaIng.isEmpty() || fechaEgr.isEmpty()) {
+            if ( idCiudad.isEmpty() || tipoAlo.isEmpty() || costoAlo.isEmpty() || fechaIng.isEmpty() || fechaEgr.isEmpty()) {
                 JOptionPane.showMessageDialog(this, "Campo Obligatorio vacio");
                 return;
             }
@@ -1277,7 +1314,8 @@ public class PanelAdmin2 extends javax.swing.JPanel {
             LocalDate fecha1 = null;
             LocalDate fecha2 = null;
             double costoA = 0.0;
-            Ciudad ciudadDes = buscarCiuData.buscarCiudadParaLista(idCiudad);
+            int iDCiudad = Integer.parseInt(idCiudad);
+            Ciudad ciudadDes = buscarCiuData.buscarCiudadParaLista(iDCiudad);
 
             try {
                 // Convierte las cadenas en objetos LocalDate
