@@ -6,6 +6,7 @@ import finalgrupo57.Entidades.Ciudad;
 import finalgrupo57.Entidades.Alojamiento;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 
@@ -50,11 +51,14 @@ public class Alojamientos extends javax.swing.JPanel {
         jLabel2 = new javax.swing.JLabel();
         jtCantidadPorHospedaje = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        jbCalcular = new javax.swing.JButton();
         jbSalir = new javax.swing.JButton();
         jbConfirmarHospedaje = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
         cboxCiudades2 = new javax.swing.JComboBox<>();
+        jLCostoFinalHospedaje = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        jTextDiasHospedaje = new javax.swing.JTextField();
 
         setBackground(new java.awt.Color(255, 255, 255));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -63,13 +67,10 @@ public class Alojamientos extends javax.swing.JPanel {
 
         jPanel2.setBackground(new java.awt.Color(51, 204, 0,120));
 
-        jLabel1.setForeground(new java.awt.Color(0, 0, 0));
         jLabel1.setText("Disponibilidad de Alojamientos:");
 
-        jLabel5.setForeground(new java.awt.Color(0, 0, 0));
         jLabel5.setText("Precio de Alojamiento esta sujeto a la temporada ");
 
-        jLabel6.setForeground(new java.awt.Color(0, 0, 0));
         jLabel6.setText("que se realizar el viaje");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -114,16 +115,14 @@ public class Alojamientos extends javax.swing.JPanel {
         ));
         jScrollPane1.setViewportView(jtTablaHospedajes);
 
-        jLabel2.setForeground(new java.awt.Color(0, 0, 0));
         jLabel2.setText("Cantidad de Personas:");
 
-        jLabel3.setForeground(new java.awt.Color(0, 0, 0));
         jLabel3.setText("Costo Total de Hospedaje:");
 
-        jButton1.setText("Calcular");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        jbCalcular.setText("Calcular");
+        jbCalcular.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                jbCalcularActionPerformed(evt);
             }
         });
 
@@ -136,12 +135,21 @@ public class Alojamientos extends javax.swing.JPanel {
 
         jbConfirmarHospedaje.setText("Confirmar");
 
-        jLabel4.setForeground(new java.awt.Color(0, 0, 0));
         jLabel4.setText("Ciudad de Destino:");
 
         cboxCiudades2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cboxCiudades2ActionPerformed(evt);
+            }
+        });
+
+        jLCostoFinalHospedaje.setText("Importe Final");
+
+        jLabel7.setText("Dias de Hospedaje:");
+
+        jTextDiasHospedaje.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextDiasHospedajeActionPerformed(evt);
             }
         });
 
@@ -155,23 +163,30 @@ public class Alojamientos extends javax.swing.JPanel {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jButton1)
+                        .addComponent(jbCalcular)
                         .addGap(64, 64, 64)
                         .addComponent(jbConfirmarHospedaje, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jbSalir))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 148, Short.MAX_VALUE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jtCantidadPorHospedaje, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(24, 24, 24))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(cboxCiudades2, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addComponent(cboxCiudades2, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jLCostoFinalHospedaje, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 148, Short.MAX_VALUE)
+                                    .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jtCantidadPorHospedaje, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
+                                    .addComponent(jTextDiasHospedaje))))
+                        .addGap(24, 24, 24)))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -184,15 +199,21 @@ public class Alojamientos extends javax.swing.JPanel {
                     .addComponent(cboxCiudades2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 58, Short.MAX_VALUE)
+                .addGap(24, 24, 24)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel7)
+                    .addComponent(jTextDiasHospedaje, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 22, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(jtCantidadPorHospedaje, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(34, 34, 34)
-                .addComponent(jLabel3)
+                .addGap(22, 22, 22)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3)
+                    .addComponent(jLCostoFinalHospedaje))
                 .addGap(56, 56, 56)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
+                    .addComponent(jbCalcular)
                     .addComponent(jbSalir)
                     .addComponent(jbConfirmarHospedaje))
                 .addContainerGap())
@@ -201,9 +222,34 @@ public class Alojamientos extends javax.swing.JPanel {
         add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 390, 540));
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+    private void jbCalcularActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbCalcularActionPerformed
+        try {
+            //indice de tabla
+            int selectedRow = jtTablaHospedajes.getSelectedRow();
+            if (selectedRow == -1) {
+                JOptionPane.showMessageDialog(this, "Por favor seleccione un alojamiento de la tabla");
+            } else {
+                //creo un objeto en base al valor de la tabla modelo4(Paquetes) de columna 0 y fila seleccionada
+                Object valorDTabla = modelo.getValueAt(selectedRow, 2);                
+                //transformo ese valor en un Double
+                double precioxD = Double.parseDouble(valorDTabla.toString());
+                String diasAlo = jTextDiasHospedaje.getText();//jTextDiasHospedaje
+                String canPers = jtCantidadPorHospedaje.getText();
+           
+                if (diasAlo.isEmpty() || canPers.isEmpty()) {
+                    JOptionPane.showMessageDialog(this, "No deben haber campos vacios");
+                }
+                double dA = Double.parseDouble(diasAlo);
+                double cP = Double.parseDouble(canPers);
+                double calculoImporteHospedaje = precioxD * dA * cP;
+                jLCostoFinalHospedaje.setText(String.valueOf(calculoImporteHospedaje));//otra forma de conversion (""+calculoImporte)
+            }
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "Error en los datos ingresados");
+
+        }
+        
+    }//GEN-LAST:event_jbCalcularActionPerformed
 
     private void jbSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbSalirActionPerformed
         // TODO add your handling code here:
@@ -219,19 +265,26 @@ public class Alojamientos extends javax.swing.JPanel {
         
     }//GEN-LAST:event_cboxCiudades2ActionPerformed
 
+    private void jTextDiasHospedajeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextDiasHospedajeActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextDiasHospedajeActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<Ciudad> cboxCiudades2;
-    private javax.swing.JButton jButton1;
+    private javax.swing.JLabel jLCostoFinalHospedaje;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTextField jTextDiasHospedaje;
+    private javax.swing.JButton jbCalcular;
     private javax.swing.JButton jbConfirmarHospedaje;
     private javax.swing.JButton jbSalir;
     private javax.swing.JTextField jtCantidadPorHospedaje;
@@ -255,36 +308,7 @@ public class Alojamientos extends javax.swing.JPanel {
         }
         jtTablaHospedajes.setModel(modelo);
     }
-//    private void cargarAlojamientos(){
-//        Ciudad selec = (Ciudad) cboxCiudades2.getSelectedItem();
-//        listaA= (List<Alojamiento>) aData.buscarAlojamiento(selec.getIdCiudad());
-//        //List <Alojamiento> listaC= (ArrayList) alojData.buscarAlojamiento(selec.getIdCiudad());
-//        //listaC = (ArrayList) alojData.buscarAlojamiento(selec.getIdCiudad());//crear metodo en alojamientodata
-//        DefaultTableModel modelo = (DefaultTableModel) jtTablaHospedajes.getModel();
-//        
-//        for (Alojamiento a:listaA){
-//            
-//            String tipo=a.getTipo();
-//            String servicio= a.getServicio();
-//            double precio= a.getImporteDiario();
-//            modelo.addRow(new Object[]{tipo, servicio, precio});//definir String tipo=a.getTipo() y demas para evitar posible error luego
-//        }
-//    }
-    //CARGA TODOS LOS ALOJAMIENTOS
-//    private void cargarAlojamientos() {
-//    DefaultTableModel modelo = (DefaultTableModel) jtTablaHospedajes.getModel();
-//    modelo.setRowCount(0); // Limpia la tabla antes de agregar nuevos datos
-//    
-//    List<Alojamiento> alojamientos = aData.listarAlojamientos(); // Obtén la lista de todos los alojamientos disponibles
-//    
-//    for (Alojamiento a : alojamientos) {
-//        // Accede a los atributos de Alojamiento y agrega una fila a la tabla
-//        String tipo = a.getTipo();
-//        String servicio = a.getServicio();
-//        double precio = a.getImporteDiario();
-//        modelo.addRow(new Object[]{tipo, servicio, precio});
-//    }
-//    }
+
     private void cargarAlojamientos() {
     DefaultTableModel modelo = (DefaultTableModel) jtTablaHospedajes.getModel();
     modelo.setRowCount(0); // Limpia la tabla antes de agregar nuevos datos
