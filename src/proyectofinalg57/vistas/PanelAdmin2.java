@@ -1309,7 +1309,8 @@ public class PanelAdmin2 extends javax.swing.JPanel {
                 pData.modificarPaquete(paquetenew);
 
             }
-
+jTextCiuOrgPaq.setEnabled(true);
+jTextCiuDesPaq.setEnabled(true);
             cargarPaquetes();
             limpiarPaquetes();
 
@@ -1320,11 +1321,20 @@ public class PanelAdmin2 extends javax.swing.JPanel {
     }//GEN-LAST:event_jbModificarPaqActionPerformed
 
     private void jbEliminarPaqActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbEliminarPaqActionPerformed
+        int indice = jtPaquetes.getSelectedRow();
+        String idalojamiento = jtPaquetes.getValueAt(indice, 3).toString();
+        String idtransporte = jtPaquetes.getValueAt(indice, 4).toString();
+        int idA; int idT;
+        int ip = idalojamiento.indexOf(")");
+        String parteidA = idalojamiento.substring(0, ip);
+        idA = Integer.parseInt(parteidA);
+        int ip2 = idtransporte.indexOf(")");
+        String parteidT = idtransporte.substring(0, ip2);
+        idT = Integer.parseInt(parteidT);
+                
         
-        int iDAlo = Integer.parseInt(jTextAlojamientoPaq.getText());
-        int iDTran = Integer.parseInt(jTextTransportePaq.getText());
         
-        pData.borrarPaquete(iDAlo, iDTran);
+        pData.borrarPaquete(idA, idT);
         cargarPaquetes();
         limpiarPaquetes();
     }//GEN-LAST:event_jbEliminarPaqActionPerformed
@@ -1817,10 +1827,10 @@ char c = evt.getKeyChar();
         
         int indice = jtPaquetes.getSelectedRow();//creo una variable indice y le doy el valor de la fila seleccionada
         //el valor que este en la columna lo necesito por el id al comienzo
-        String idCiuOr = jtPaquetes.getValueAt(indice, 0).toString();
-        String idCiuDes = jtPaquetes.getValueAt(indice, 1).toString();
-        String idAlo = jtPaquetes.getValueAt (indice,2).toString();
-        String idTran = jtPaquetes.getValueAt (indice,3).toString();
+        String idCiuOr = jtPaquetes.getValueAt(indice, 1).toString();
+        String idCiuDes = jtPaquetes.getValueAt(indice, 2).toString();
+        String idAlo = jtPaquetes.getValueAt (indice,3).toString();
+        String idTran = jtPaquetes.getValueAt (indice,4).toString();
         //int iCO; int iCD; int iA ; int iT;//variables para las id de cada columna a buscar
         //para ID CiuO
         int ipCO = idCiuOr.indexOf(")");//busco la posicion de ")"
@@ -1840,7 +1850,9 @@ char c = evt.getKeyChar();
         //iT = Integer.parseInt(parteIdT);
         //seteo los jText
         jTextCiuOrgPaq.setText(parteIdCO);
+        jTextCiuOrgPaq.setEnabled(false);
         jTextCiuDesPaq.setText(parteIdCD);
+        jTextCiuDesPaq.setEnabled(false);
         jTextAlojamientoPaq.setText(parteIdA);
         jTextTransportePaq.setText(parteIdT);
         
@@ -2071,7 +2083,7 @@ private void armarCabeceraTabla4() {
         
         
         
-        modelo4.addRow(new Object[]{ciudadOrigen, ciudadDestino,alojamiento,transporte});
+        modelo4.addRow(new Object[]{idPaq, ciudadOrigen, ciudadDestino,alojamiento,transporte});
     }
 
     }
@@ -2106,6 +2118,8 @@ private void armarCabeceraTabla4() {
         jTextCiuDesPaq.setText("");
         jTextAlojamientoPaq.setText("");
         jTextTransportePaq.setText("");
+        jTextCiuOrgPaq.setEnabled(true);
+        jTextCiuDesPaq.setEnabled(true);
     }
 
 
