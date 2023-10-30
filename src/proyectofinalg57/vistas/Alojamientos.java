@@ -134,6 +134,11 @@ public class Alojamientos extends javax.swing.JPanel {
         });
 
         jbConfirmarHospedaje.setText("Confirmar");
+        jbConfirmarHospedaje.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbConfirmarHospedajeActionPerformed(evt);
+            }
+        });
 
         jLabel4.setText("Ciudad de Destino:");
 
@@ -230,11 +235,14 @@ public class Alojamientos extends javax.swing.JPanel {
                 JOptionPane.showMessageDialog(this, "Por favor seleccione un alojamiento de la tabla");
             } else {
                 //creo un objeto en base al valor de la tabla modelo4(Paquetes) de columna 0 y fila seleccionada
-                Object valorDTabla = modelo.getValueAt(selectedRow, 2);                
+                Object costoTabla = modelo.getValueAt(selectedRow, 2);                
                 //transformo ese valor en un Double
-                double precioxD = Double.parseDouble(valorDTabla.toString());
+                double precioxD = Double.parseDouble(costoTabla.toString());
                 String diasAlo = jTextDiasHospedaje.getText();//jTextDiasHospedaje
                 String canPers = jtCantidadPorHospedaje.getText();
+                
+                Object tipoAlo = modelo.getValueAt(selectedRow, 0);
+                String tipoA = String.valueOf(tipoAlo);
            
                 if (diasAlo.isEmpty() || canPers.isEmpty()) {
                     JOptionPane.showMessageDialog(this, "No deben haber campos vacios");
@@ -269,6 +277,20 @@ public class Alojamientos extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextDiasHospedajeActionPerformed
 
+    private void jbConfirmarHospedajeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbConfirmarHospedajeActionPerformed
+        ResumenVentas resumen = new ResumenVentas();
+        int selectedRow = jtTablaHospedajes.getSelectedRow();
+            if (selectedRow == -1) {
+                JOptionPane.showMessageDialog(this, "Por favor seleccione un alojamiento de la tabla");
+            } else {
+                Object tipoAlo = modelo.getValueAt(selectedRow, 0);
+                System.out.println(tipoAlo);
+                String tipoA = String.valueOf(tipoAlo);
+                System.out.println(tipoA);
+                resumen.setAlojamientoF(tipoA);//mostrara en el Resumen 
+            }
+    }//GEN-LAST:event_jbConfirmarHospedajeActionPerformed
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<Ciudad> cboxCiudades2;
@@ -310,27 +332,27 @@ public class Alojamientos extends javax.swing.JPanel {
     }
 
     private void cargarAlojamientos() {
-    DefaultTableModel modelo = (DefaultTableModel) jtTablaHospedajes.getModel();
-    modelo.setRowCount(0); // Limpia la tabla antes de agregar nuevos datos
+        DefaultTableModel modelo = (DefaultTableModel) jtTablaHospedajes.getModel();
+        modelo.setRowCount(0); // Limpia la tabla antes de agregar nuevos datos
 
-    Ciudad selec = (Ciudad) cboxCiudades2.getSelectedItem();
-    int ciudadId = selec.getIdCiudad(); // guardo el ID de la ciudad marcada en el cbox
-    List<Alojamiento> alojamientos = aData.listarAlojamientos();// lista de todos los alojamientos
+        Ciudad selec = (Ciudad) cboxCiudades2.getSelectedItem();
+        int ciudadId = selec.getIdCiudad(); // guardo el ID de la ciudad marcada en el cbox
+        List<Alojamiento> alojamientos = aData.listarAlojamientos();// lista de todos los alojamientos
 
-    // filtro los alojamientos segun el ID de la ciudad del cbox
-    List<Alojamiento> alojamientosPorID = new ArrayList<>();
-    for (Alojamiento a : alojamientos) {
-        if (a.getCiudadDest().getIdCiudad() == ciudadId) {
-            alojamientosPorID.add(a);
+        // filtro los alojamientos segun el ID de la ciudad del cbox
+        List<Alojamiento> alojamientosPorID = new ArrayList<>();
+        for (Alojamiento a : alojamientos) {
+            if (a.getCiudadDest().getIdCiudad() == ciudadId) {
+                alojamientosPorID.add(a);
+            }
+        }
+
+        // cargo la tabla con los alojamientos que se filtro
+        for (Alojamiento a : alojamientosPorID) {
+            String tipo = a.getTipo();
+            String servicio = a.getServicio();
+            double precio = a.getImporteDiario();
+            modelo.addRow(new Object[]{tipo, servicio, precio});
         }
     }
-
-    // cargo la tabla con los alojamientos que se filtro
-    for (Alojamiento a : alojamientosPorID) {
-        String tipo = a.getTipo();
-        String servicio = a.getServicio();
-        double precio = a.getImporteDiario();
-        modelo.addRow(new Object[]{tipo, servicio, precio});
-    }
-}
 }

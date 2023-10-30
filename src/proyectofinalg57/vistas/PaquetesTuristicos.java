@@ -5,17 +5,38 @@
  */
 package proyectofinalg57.vistas;
 
+import finalgrupo57.AccesoADatos.CiudadData;
+import finalgrupo57.AccesoADatos.PaqueteData;
+import finalgrupo57.Entidades.Alojamiento;
+import finalgrupo57.Entidades.Ciudad;
+import finalgrupo57.Entidades.Paquete;
+import finalgrupo57.Entidades.Pasaje;
+import java.util.ArrayList;
+import java.util.List;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author User
  */
 public class PaquetesTuristicos extends javax.swing.JPanel {
 
-    /**
-     * Creates new form PaquetesTuristicos
-     */
+    private DefaultTableModel modelo4;
+    private PaqueteData pData;
+    private List<Paquete> listaP;
+    private List<Ciudad> listaC;
+    private CiudadData cData;
+    
     public PaquetesTuristicos() {
         initComponents();
+        modelo4 = new DefaultTableModel();
+        armarCabeceraTabla4();
+        pData = new PaqueteData();
+        listaP = pData.listarPaquetes();
+        cargarPaquetes();
+        cData = new CiudadData();
+        listaC = cData.listarCiudad();
+        cargarCiudad();
     }
 
     /**
@@ -33,13 +54,12 @@ public class PaquetesTuristicos extends javax.swing.JPanel {
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
-        jLabel5 = new javax.swing.JLabel();
-        jComboBox2 = new javax.swing.JComboBox<>();
+        cBoxCiudades = new javax.swing.JComboBox<>();
+        jbBuscar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
-        jButton1 = new javax.swing.JButton();
+        jtPaquetes = new javax.swing.JTable();
         jbSalir = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -56,20 +76,17 @@ public class PaquetesTuristicos extends javax.swing.JPanel {
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setText("Ciudad:");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Origen" }));
-        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
+        cBoxCiudades.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Origen" }));
+        cBoxCiudades.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBox1ActionPerformed(evt);
+                cBoxCiudadesActionPerformed(evt);
             }
         });
 
-        jLabel5.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel5.setText("Temporada:");
-
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Segun fecha" }));
-        jComboBox2.addActionListener(new java.awt.event.ActionListener() {
+        jbBuscar.setText("Buscar");
+        jbBuscar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBox2ActionPerformed(evt);
+                jbBuscarActionPerformed(evt);
             }
         });
 
@@ -87,12 +104,10 @@ public class PaquetesTuristicos extends javax.swing.JPanel {
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jLabel4)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jLabel5)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(18, Short.MAX_VALUE))
+                        .addComponent(cBoxCiudades, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(31, 31, 31)
+                        .addComponent(jbBuscar)))
+                .addContainerGap(248, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -106,33 +121,37 @@ public class PaquetesTuristicos extends javax.swing.JPanel {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel4)
-                            .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel5)
-                            .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 0, Short.MAX_VALUE))
+                            .addComponent(cBoxCiudades, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jbBuscar))
+                        .addGap(0, 9, Short.MAX_VALUE))
                     .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        jtPaquetes.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "ID", "Ciudad Origen", "Ciudad Destino", "Alojamiento", "Transporte"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
-
-        jButton1.setText("Confirmar");
+        jScrollPane1.setViewportView(jtPaquetes);
 
         jbSalir.setText("Salir");
         jbSalir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jbSalirActionPerformed(evt);
+            }
+        });
+
+        jButton1.setText("Paquetes");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
             }
         });
 
@@ -157,10 +176,10 @@ public class PaquetesTuristicos extends javax.swing.JPanel {
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 340, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 56, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 53, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(jbSalir))
+                    .addComponent(jbSalir)
+                    .addComponent(jButton1))
                 .addContainerGap())
         );
 
@@ -176,33 +195,107 @@ public class PaquetesTuristicos extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
+    private void cBoxCiudadesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cBoxCiudadesActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jComboBox1ActionPerformed
-
-    private void jComboBox2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jComboBox2ActionPerformed
+    }//GEN-LAST:event_cBoxCiudadesActionPerformed
 
     private void jbSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbSalirActionPerformed
         // TODO add your handling code here:
         this.setVisible(false);
     }//GEN-LAST:event_jbSalirActionPerformed
 
+    private void jbBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbBuscarActionPerformed
+        
+        cargarPaquetesFiltrado();
+    }//GEN-LAST:event_jbBuscarActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        cargarPaquetes();
+    }//GEN-LAST:event_jButton1ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JComboBox<String> cBoxCiudades;
     private javax.swing.JButton jButton1;
-    private javax.swing.JComboBox<String> jComboBox1;
-    private javax.swing.JComboBox<String> jComboBox2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JButton jbBuscar;
     private javax.swing.JButton jbSalir;
+    private javax.swing.JTable jtPaquetes;
     // End of variables declaration//GEN-END:variables
+
+    
+    private void cargarCiudad() {
+        for(Ciudad item: listaC){
+     //recorre la lista y se lo setea al checkbox
+        cBoxCiudades.addItem(""+item);
+        
+        }
+    }
+    
+private void armarCabeceraTabla4() {
+        ArrayList<Object> filaCabecera = new ArrayList<>();
+        filaCabecera.add("ID");
+        filaCabecera.add("Ciudad Origen");
+        filaCabecera.add("Ciudad Destino");
+        filaCabecera.add("Alojamiento");
+        filaCabecera.add("Transporte");
+        for (Object it: filaCabecera){
+            modelo4.addColumn(it);
+        }
+        jtPaquetes.setModel(modelo4);
+    
+}
+    
+    private void cargarPaquetes (){
+    DefaultTableModel modelo4 = (DefaultTableModel) jtPaquetes.getModel();
+    modelo4.setRowCount(0); // Limpia la tabla antes de agregar nuevos datos
+    
+    List<Paquete> paquetes = pData.listarPaquetes(); // Obtén la lista de todos los alojamientos disponibles
+    
+    for (Paquete a : paquetes) {
+        // Accede a los atributos de Alojamiento y agrega una fila a la tabla
+        int idPaq = a.getIdPaquete();
+        Ciudad ciudadOrigen = a.getOrigen();
+        Ciudad ciudadDestino = a.getDestino();
+        Alojamiento alojamiento = a.getAlojamiento();
+        Pasaje transporte = a.getPasaje();
+        
+        
+        
+        modelo4.addRow(new Object[]{idPaq,ciudadOrigen, ciudadDestino,alojamiento,transporte});
+    }
+    }
+    
+    private void cargarPaquetesFiltrado() {
+        DefaultTableModel modelo = (DefaultTableModel) jtPaquetes.getModel();
+        modelo.setRowCount(0); // Limpia la tabla antes de agregar nuevos datos
+
+        Ciudad selec = (Ciudad) cBoxCiudades.getSelectedItem();
+        int ciudadId = selec.getIdCiudad(); // guardo el ID de la ciudad marcada en el cbox
+        List<Paquete> paquetes = pData.listarPaquetes();// lista de todos los paquetes
+
+        // filtro los paquetes segun el ID de la ciudad del cbox
+        List<Paquete> PaquetePorID = new ArrayList<>();
+        for (Paquete a : paquetes) {
+            if (a.getPasaje().getNombreCiudadOrigen().getIdCiudad()== ciudadId) {
+                PaquetePorID.add(a);
+            }
+        }
+
+        // cargo la tabla con los paquetes que se filtraron
+        for (Paquete a : PaquetePorID) {
+            int idPaq = a.getIdPaquete();
+            Ciudad ciuO = a.getOrigen();
+            Ciudad ciuD = a.getDestino();
+            Pasaje Transporte = a.getPasaje();
+            modelo4.addRow(new Object[]{idPaq,ciuO,ciuD,Transporte});
+        }
+    }
+
 }

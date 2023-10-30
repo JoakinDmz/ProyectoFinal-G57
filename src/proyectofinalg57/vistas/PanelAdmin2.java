@@ -1221,7 +1221,7 @@ public class PanelAdmin2 extends javax.swing.JPanel {
         int idCiuDesti = Integer.parseInt(idCiuDest);
         int idAlojamiento = Integer.parseInt(idalojamiento);
         int idTransporte = Integer.parseInt(idtransporte);
-        Ciudad ciudadOr = cData.buscarCiudadParaLista(idCiuOri);//corregir
+        Ciudad ciudadOr = cData.buscarCiudadParaLista(idCiuOri);
         Ciudad ciudadDest = cData.buscarCiudadParaLista(idCiuDesti);
         Alojamiento alo = aloData.buscarAlojamiento(idAlojamiento);
         Pasaje pas = tData.buscarPasaje(idTransporte);
@@ -2046,7 +2046,7 @@ private void armarCabeceraTabla4() {
         
         
         
-        modelo4.addRow(new Object[]{ciudadOrigen, ciudadDestino,alojamiento,transporte});
+        modelo4.addRow(new Object[]{idPaq,ciudadOrigen, ciudadDestino,alojamiento,transporte});
     }
 
     }
