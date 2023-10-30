@@ -1288,6 +1288,12 @@ public class PanelAdmin2 extends javax.swing.JPanel {
     }//GEN-LAST:event_jbModificarPaqActionPerformed
 
     private void jbEliminarPaqActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbEliminarPaqActionPerformed
+        
+        int iDAlo = Integer.parseInt(jTextAlojamientoPaq.getText());
+        int iDTran = Integer.parseInt(jTextTransportePaq.getText());
+        
+        pData.borrarPaquete(iDAlo, iDTran);
+        cargarPaquetes();
         limpiarPaquetes();
     }//GEN-LAST:event_jbEliminarPaqActionPerformed
 
