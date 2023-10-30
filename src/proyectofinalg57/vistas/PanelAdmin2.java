@@ -193,6 +193,7 @@ public class PanelAdmin2 extends javax.swing.JPanel {
         jbEliminarPaq = new javax.swing.JButton();
         jbSalirPaq = new javax.swing.JButton();
         jbLimpiarPaq = new javax.swing.JButton();
+        jbSelecPaq = new javax.swing.JButton();
 
         jPanel1.setBackground(new java.awt.Color(10, 52, 80));
 
@@ -834,7 +835,7 @@ public class PanelAdmin2 extends javax.swing.JPanel {
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel30)
                     .addComponent(jLabel34))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 25, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel28)
                     .addComponent(jTextIDPasaje, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -948,6 +949,13 @@ public class PanelAdmin2 extends javax.swing.JPanel {
             }
         });
 
+        jbSelecPaq.setText("Seleccionar");
+        jbSelecPaq.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbSelecPaqActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
         jPanel5Layout.setHorizontalGroup(
@@ -974,13 +982,15 @@ public class PanelAdmin2 extends javax.swing.JPanel {
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(jPanel5Layout.createSequentialGroup()
                         .addComponent(jbLimpiarPaq)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 115, Short.MAX_VALUE)
+                        .addGap(54, 54, 54)
+                        .addComponent(jbSelecPaq)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 49, Short.MAX_VALUE)
                         .addComponent(jbAgregarPaq)
-                        .addGap(103, 103, 103)
+                        .addGap(82, 82, 82)
                         .addComponent(jbModificarPaq)
-                        .addGap(98, 98, 98)
+                        .addGap(70, 70, 70)
                         .addComponent(jbEliminarPaq)
-                        .addGap(94, 94, 94)
+                        .addGap(57, 57, 57)
                         .addComponent(jbSalirPaq)
                         .addGap(38, 38, 38))))
         );
@@ -1011,7 +1021,8 @@ public class PanelAdmin2 extends javax.swing.JPanel {
                     .addComponent(jbModificarPaq)
                     .addComponent(jbEliminarPaq)
                     .addComponent(jbSalirPaq)
-                    .addComponent(jbLimpiarPaq))
+                    .addComponent(jbLimpiarPaq)
+                    .addComponent(jbSelecPaq))
                 .addContainerGap(58, Short.MAX_VALUE))
         );
 
@@ -1233,7 +1244,47 @@ public class PanelAdmin2 extends javax.swing.JPanel {
     }//GEN-LAST:event_jbAgregarPaqActionPerformed
 
     private void jbModificarPaqActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbModificarPaqActionPerformed
-        limpiarPaquetes();
+        
+        try {
+            //indice de tabla
+            int selectedRow = jtPaquetes.getSelectedRow();
+            //creo un objeto en base al valor de la tabla modelo4(Paquetes) de columna 0 y fila seleccionada
+            Object valorDTabla = modelo4.getValueAt(selectedRow, 0);
+            //transformo ese valor en un int
+            int idPaq = Integer.parseInt(valorDTabla.toString());
+            String idCiuOr = jTextCiuOrgPaq.getText();
+            String idCiuDest = jTextCiuDesPaq.getText();
+            String idalojamiento = jTextAlojamientoPaq.getText();
+            String idtransporte = jTextTransportePaq.getText();
+
+            if (idCiuOr.isEmpty() || idCiuDest.isEmpty() || idalojamiento.isEmpty() || idtransporte.isEmpty()) {
+                JOptionPane.showMessageDialog(this, "Campo Obligatorio vacio");
+                return;
+
+            }
+            //transformar los String en INT para poder usar en los metodos y pasar a PAQUETE()
+            int idCiuOri = Integer.parseInt(idCiuOr);
+            int idCiuDesti = Integer.parseInt(idCiuDest);
+            int idAlojamiento = Integer.parseInt(idalojamiento);
+            int idTransporte = Integer.parseInt(idtransporte);
+            Ciudad ciudadOr = cData.buscarCiudadParaLista(idCiuOri);//corregir
+            Ciudad ciudadDest = cData.buscarCiudadParaLista(idCiuDesti);
+            Alojamiento alo = aloData.buscarAlojamiento(idAlojamiento);
+            Pasaje pas = tData.buscarPasaje(idTransporte);
+            paquetenew = null;
+            if (paquetenew == null) {
+                Paquete paquetenew = new Paquete(idPaq,ciudadOr, ciudadDest, alo, pas);
+                pData.modificarPaquete(paquetenew);
+
+            }
+
+            cargarPaquetes();
+            limpiarPaquetes();
+
+        } catch (IllegalArgumentException e) {
+            JOptionPane.showMessageDialog(this, "Error en los datos ingresados");
+
+        }
     }//GEN-LAST:event_jbModificarPaqActionPerformed
 
     private void jbEliminarPaqActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbEliminarPaqActionPerformed
@@ -1736,6 +1787,39 @@ char c = evt.getKeyChar();
         
     }//GEN-LAST:event_jTIDciudadOrigenKeyTyped
 
+    private void jbSelecPaqActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbSelecPaqActionPerformed
+        
+        int indice = jtPaquetes.getSelectedRow();//creo una variable indice y le doy el valor de la fila seleccionada
+        //el valor que este en la columna lo necesito por el id al comienzo
+        String idCiuOr = jtPaquetes.getValueAt(indice, 0).toString();
+        String idCiuDes = jtPaquetes.getValueAt(indice, 1).toString();
+        String idAlo = jtPaquetes.getValueAt (indice,2).toString();
+        String idTran = jtPaquetes.getValueAt (indice,3).toString();
+        //int iCO; int iCD; int iA ; int iT;//variables para las id de cada columna a buscar
+        //para ID CiuO
+        int ipCO = idCiuOr.indexOf(")");//busco la posicion de ")"
+        String parteIdCO = idCiuOr.substring(0, ipCO);//extraigo hasta")"
+        //iCO = Integer.parseInt(parteIdCO);//transformo lo extraido en un int
+        //para ID CiuD
+        int ipCD = idCiuDes.indexOf(")");
+        String parteIdCD = idCiuDes.substring(0, ipCD);
+        //iCD = Integer.parseInt(parteIdCD);//transformo lo extraido en un int
+        //para ID Alo
+        int ipA = idAlo.indexOf(")");
+        String parteIdA = idAlo.substring(0, ipA);
+        //iA = Integer.parseInt(parteIdA);//transformo lo extraido en un int
+        //para ID Tran
+        int ipT = idTran.indexOf(")");
+        String parteIdT = idTran.substring(0, ipT);
+        //iT = Integer.parseInt(parteIdT);
+        //seteo los jText
+        jTextCiuOrgPaq.setText(parteIdCO);
+        jTextCiuDesPaq.setText(parteIdCD);
+        jTextAlojamientoPaq.setText(parteIdA);
+        jTextTransportePaq.setText(parteIdT);
+        
+    }//GEN-LAST:event_jbSelecPaqActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JRadioButton botonEstadoCiudad;
@@ -1822,6 +1906,7 @@ char c = evt.getKeyChar();
     private javax.swing.JButton jbSalirCiu;
     private javax.swing.JButton jbSalirPaq;
     private javax.swing.JButton jbSalirTran;
+    private javax.swing.JButton jbSelecPaq;
     private javax.swing.JButton jbSelecTran;
     private javax.swing.JButton jbSeleccionarDeTabla;
     private javax.swing.JTable jtAlojamientos;
@@ -1871,6 +1956,7 @@ private void armarCabeceraTabla3() {
 
 private void armarCabeceraTabla4() {
         ArrayList<Object> filaCabecera = new ArrayList<>();
+        filaCabecera.add("ID");
         filaCabecera.add("Ciudad Origen");
         filaCabecera.add("Ciudad Destino");
         filaCabecera.add("Alojamiento");
@@ -1946,7 +2032,7 @@ private void armarCabeceraTabla4() {
     
     for (Paquete a : paquetes) {
         // Accede a los atributos de Alojamiento y agrega una fila a la tabla
-        
+        int idPaq = a.getIdPaquete();
         Ciudad ciudadOrigen = a.getOrigen();
         Ciudad ciudadDestino = a.getDestino();
         Alojamiento alojamiento = a.getAlojamiento();

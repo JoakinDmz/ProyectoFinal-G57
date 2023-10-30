@@ -1082,13 +1082,15 @@
                           </Group>
                           <Group type="102" attributes="0">
                               <Component id="jbLimpiarPaq" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace pref="115" max="32767" attributes="0"/>
+                              <EmptySpace min="-2" pref="54" max="-2" attributes="0"/>
+                              <Component id="jbSelecPaq" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace pref="49" max="32767" attributes="0"/>
                               <Component id="jbAgregarPaq" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="103" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="82" max="-2" attributes="0"/>
                               <Component id="jbModificarPaq" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="98" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="70" max="-2" attributes="0"/>
                               <Component id="jbEliminarPaq" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="94" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="57" max="-2" attributes="0"/>
                               <Component id="jbSalirPaq" min="-2" max="-2" attributes="0"/>
                               <EmptySpace min="-2" pref="38" max="-2" attributes="0"/>
                           </Group>
@@ -1128,6 +1130,7 @@
                           <Component id="jbEliminarPaq" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="jbSalirPaq" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="jbLimpiarPaq" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jbSelecPaq" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace pref="58" max="32767" attributes="0"/>
                   </Group>
@@ -1261,6 +1264,14 @@
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jbLimpiarPaqActionPerformed"/>
+              </Events>
+            </Component>
+            <Component class="javax.swing.JButton" name="jbSelecPaq">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Seleccionar"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jbSelecPaqActionPerformed"/>
               </Events>
             </Component>
           </SubComponents>
