@@ -50,7 +50,6 @@ public class Menu extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        jbResumen = new javax.swing.JButton();
         jbPaquetes = new javax.swing.JButton();
         jbLogin = new javax.swing.JButton();
         jpVisualizador = new javax.swing.JPanel();
@@ -110,13 +109,6 @@ public class Menu extends javax.swing.JFrame {
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel4.setText("BON VOYAGE");
 
-        jbResumen.setText("RESUMEN DE IMPORTE");
-        jbResumen.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jbResumenActionPerformed(evt);
-            }
-        });
-
         jbPaquetes.setText("PAQUETES TURISTICOS");
         jbPaquetes.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -147,7 +139,6 @@ public class Menu extends javax.swing.JFrame {
                         .addContainerGap()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jbPaquetes, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jbResumen, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jbAlojamiento, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jbDestino, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addContainerGap())
@@ -173,9 +164,7 @@ public class Menu extends javax.swing.JFrame {
                 .addComponent(jbDestino, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(41, 41, 41)
                 .addComponent(jbAlojamiento, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(41, 41, 41)
-                .addComponent(jbResumen, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(70, 70, 70)
+                .addGap(161, 161, 161)
                 .addComponent(jbLogin)
                 .addGap(18, 18, 18)
                 .addComponent(jbModAdmin)
@@ -315,12 +304,6 @@ public class Menu extends javax.swing.JFrame {
 //        jpVisualizador.repaint();   
     }//GEN-LAST:event_jbDestinoActionPerformed
 
-    private void jbResumenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbResumenActionPerformed
-        // TODO add your handling code here:
-        ResumenVentas resumen = new ResumenVentas();
-        resumen.setVisible(true);
-    }//GEN-LAST:event_jbResumenActionPerformed
-
     private void jbModAdminActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbModAdminActionPerformed
         // TODO add your handling code here:
         //PanelAdministrador paneladmin = new PanelAdministrador();
@@ -401,7 +384,6 @@ public class Menu extends javax.swing.JFrame {
     private javax.swing.JButton jbLogin;
     private javax.swing.JButton jbModAdmin;
     private javax.swing.JButton jbPaquetes;
-    private javax.swing.JButton jbResumen;
     private javax.swing.JPanel jpVisualizador;
     private javax.swing.JPanel jpVisualizador2;
     private javax.swing.JPanel jpVisualizador3;

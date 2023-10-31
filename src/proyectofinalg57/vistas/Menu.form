@@ -132,7 +132,6 @@
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Component id="jbPaquetes" alignment="1" max="32767" attributes="0"/>
-                              <Component id="jbResumen" alignment="0" max="32767" attributes="0"/>
                               <Component id="jbAlojamiento" alignment="0" max="32767" attributes="0"/>
                               <Component id="jbDestino" alignment="1" max="32767" attributes="0"/>
                           </Group>
@@ -165,9 +164,7 @@
                   <Component id="jbDestino" min="-2" pref="50" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="41" max="-2" attributes="0"/>
                   <Component id="jbAlojamiento" min="-2" pref="50" max="-2" attributes="0"/>
-                  <EmptySpace min="-2" pref="41" max="-2" attributes="0"/>
-                  <Component id="jbResumen" min="-2" pref="50" max="-2" attributes="0"/>
-                  <EmptySpace min="-2" pref="70" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="161" max="-2" attributes="0"/>
                   <Component id="jbLogin" min="-2" max="-2" attributes="0"/>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Component id="jbModAdmin" min="-2" max="-2" attributes="0"/>
@@ -222,14 +219,6 @@
             <Property name="horizontalAlignment" type="int" value="0"/>
             <Property name="text" type="java.lang.String" value="BON VOYAGE"/>
           </Properties>
-        </Component>
-        <Component class="javax.swing.JButton" name="jbResumen">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="RESUMEN DE IMPORTE"/>
-          </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jbResumenActionPerformed"/>
-          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="jbPaquetes">
           <Properties>

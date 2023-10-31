@@ -53,7 +53,6 @@ public class Alojamientos extends javax.swing.JPanel {
         jLabel3 = new javax.swing.JLabel();
         jbCalcular = new javax.swing.JButton();
         jbSalir = new javax.swing.JButton();
-        jbConfirmarHospedaje = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
         cboxCiudades2 = new javax.swing.JComboBox<>();
         jLCostoFinalHospedaje = new javax.swing.JLabel();
@@ -133,13 +132,6 @@ public class Alojamientos extends javax.swing.JPanel {
             }
         });
 
-        jbConfirmarHospedaje.setText("Confirmar");
-        jbConfirmarHospedaje.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jbConfirmarHospedajeActionPerformed(evt);
-            }
-        });
-
         jLabel4.setText("Ciudad de Destino:");
 
         cboxCiudades2.addActionListener(new java.awt.event.ActionListener() {
@@ -169,8 +161,6 @@ public class Alojamientos extends javax.swing.JPanel {
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jbCalcular)
-                        .addGap(64, 64, 64)
-                        .addComponent(jbConfirmarHospedaje, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jbSalir))
                     .addGroup(jPanel1Layout.createSequentialGroup()
@@ -219,8 +209,7 @@ public class Alojamientos extends javax.swing.JPanel {
                 .addGap(56, 56, 56)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jbCalcular)
-                    .addComponent(jbSalir)
-                    .addComponent(jbConfirmarHospedaje))
+                    .addComponent(jbSalir))
                 .addContainerGap())
         );
 
@@ -276,20 +265,6 @@ public class Alojamientos extends javax.swing.JPanel {
     private void jTextDiasHospedajeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextDiasHospedajeActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextDiasHospedajeActionPerformed
-
-    private void jbConfirmarHospedajeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbConfirmarHospedajeActionPerformed
-        ResumenVentas resumen = new ResumenVentas();
-        int selectedRow = jtTablaHospedajes.getSelectedRow();
-            if (selectedRow == -1) {
-                JOptionPane.showMessageDialog(this, "Por favor seleccione un alojamiento de la tabla");
-            } else {
-                Object tipoAlo = modelo.getValueAt(selectedRow, 0);
-                System.out.println(tipoAlo);
-                String tipoA = String.valueOf(tipoAlo);
-                System.out.println(tipoA);
-                resumen.setAlojamientoF(tipoA);//mostrara en el Resumen 
-            }
-    }//GEN-LAST:event_jbConfirmarHospedajeActionPerformed
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -307,7 +282,6 @@ public class Alojamientos extends javax.swing.JPanel {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField jTextDiasHospedaje;
     private javax.swing.JButton jbCalcular;
-    private javax.swing.JButton jbConfirmarHospedaje;
     private javax.swing.JButton jbSalir;
     private javax.swing.JTextField jtCantidadPorHospedaje;
     private javax.swing.JTable jtTablaHospedajes;

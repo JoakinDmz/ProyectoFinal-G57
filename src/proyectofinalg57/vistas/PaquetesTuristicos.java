@@ -276,20 +276,17 @@ private void armarCabeceraTabla4() {
         DefaultTableModel modelo = (DefaultTableModel) jtPaquetes.getModel();
         modelo.setRowCount(0); // Limpia la tabla antes de agregar nuevos datos
 
-        Ciudad selec = (Ciudad) cBoxCiudades.getSelectedItem();
-        int ciudadId = selec.getIdCiudad(); // guardo el ID de la ciudad marcada en el cbox
-        List<Paquete> paquetes = pData.listarPaquetes();// lista de todos los paquetes
+        String  selec =  String.valueOf(cBoxCiudades.getSelectedItem());
 
+        String[] xi = selec.split("\\D+");
+        int ciudadId = Integer.parseInt(xi[0]); // guardo el ID de la ciudad marcada en el cbox
+        List<Paquete> paquetes = pData.listarPaquetesId(ciudadId);// lista de todos los paquetes
+        System.out.println(ciudadId);
         // filtro los paquetes segun el ID de la ciudad del cbox
-        List<Paquete> PaquetePorID = new ArrayList<>();
-        for (Paquete a : paquetes) {
-            if (a.getPasaje().getNombreCiudadOrigen().getIdCiudad()== ciudadId) {
-                PaquetePorID.add(a);
-            }
-        }
+
 
         // cargo la tabla con los paquetes que se filtraron
-        for (Paquete a : PaquetePorID) {
+        for (Paquete a : paquetes) {
             int idPaq = a.getIdPaquete();
             Ciudad ciuO = a.getOrigen();
             Ciudad ciuD = a.getDestino();
@@ -297,5 +294,6 @@ private void armarCabeceraTabla4() {
             modelo4.addRow(new Object[]{idPaq,ciuO,ciuD,Transporte});
         }
     }
+    
 
 }

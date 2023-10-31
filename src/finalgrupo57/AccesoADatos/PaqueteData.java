@@ -202,7 +202,37 @@ public class PaqueteData {
 
     }
      
-     
+     public List<Paquete> listarPaquetesId(int id) {
+
+        String sql = "SELECT * FROM paquete WHERE cOrigen=?";
+        ArrayList<Paquete> paquetes = new ArrayList<>();
+        try {
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setInt(1, id);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()){
+                Paquete paq = new Paquete();
+                paq.setIdPaquete(rs.getInt("idPaquete"));
+                paq.setOrigen(cd.buscarCiudad(rs.getInt("cOrigen")));
+                paq.setDestino(cd.buscarCiudad(rs.getInt("cDestino")));
+                paq.setAlojamiento(ad.buscarAlojamiento(rs.getInt("idAlojamiento")));
+                paq.setPasaje(pd.buscarPasaje(rs.getInt("idPasaje")));
+
+
+
+                paquetes.add(paq);
+
+            } 
+
+            ps.close();
+
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error al listar paquetes");
+        }
+        return paquetes;
+
+
+}
      
      
      

@@ -357,7 +357,7 @@ private int primerElemento;
         
         int idCiu = Integer.parseInt(x[0]);
         
-        System.out.println( "idCiudad " +idCiu );
+//        System.out.println( "idCiudad " +idCiu );
         listaT = tData.listarPasajesCiudad(idCiu);
         
         for (Pasaje item : listaT) {
