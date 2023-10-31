@@ -199,6 +199,11 @@ public class PanelAdmin2 extends javax.swing.JPanel {
         jLabel37 = new javax.swing.JLabel();
         jLabel38 = new javax.swing.JLabel();
         jLabel39 = new javax.swing.JLabel();
+        jLabel40 = new javax.swing.JLabel();
+        jLabel41 = new javax.swing.JLabel();
+        jTextCanPers = new javax.swing.JTextField();
+        jLImporte = new javax.swing.JLabel();
+        jbcalcular = new javax.swing.JButton();
 
         jPanel1.setBackground(new java.awt.Color(10, 52, 80));
 
@@ -972,6 +977,25 @@ public class PanelAdmin2 extends javax.swing.JPanel {
 
         jLabel39.setText("*");
 
+        jLabel40.setText("Precio por Paquete:");
+
+        jLabel41.setText("Cantidad de Personas:");
+
+        jTextCanPers.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTextCanPersKeyTyped(evt);
+            }
+        });
+
+        jLImporte.setText("Importe");
+
+        jbcalcular.setText("Calcular");
+        jbcalcular.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbcalcularActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
         jPanel5Layout.setHorizontalGroup(
@@ -997,11 +1021,22 @@ public class PanelAdmin2 extends javax.swing.JPanel {
                             .addComponent(jTextCiuOrgPaq))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel36)
-                            .addComponent(jLabel37)
                             .addComponent(jLabel38)
-                            .addComponent(jLabel39))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(jLabel39)
+                            .addGroup(jPanel5Layout.createSequentialGroup()
+                                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel36)
+                                    .addComponent(jLabel37))
+                                .addGap(141, 141, 141)
+                                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel41)
+                                    .addComponent(jLabel40)
+                                    .addComponent(jbcalcular))
+                                .addGap(18, 18, 18)
+                                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jTextCanPers, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLImporte, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addContainerGap(60, Short.MAX_VALUE))
                     .addGroup(jPanel5Layout.createSequentialGroup()
                         .addComponent(jbLimpiarPaq)
                         .addGap(54, 54, 54)
@@ -1031,13 +1066,24 @@ public class PanelAdmin2 extends javax.swing.JPanel {
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel13)
                     .addComponent(jTextCiuOrgPaq, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel36))
-                .addGap(37, 37, 37)
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel14)
-                    .addComponent(jTextCiuDesPaq, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel37))
-                .addGap(43, 43, 43)
+                    .addComponent(jLabel36)
+                    .addComponent(jLabel40)
+                    .addComponent(jLImporte))
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel5Layout.createSequentialGroup()
+                        .addGap(37, 37, 37)
+                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel14)
+                            .addComponent(jTextCiuDesPaq, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel37)))
+                    .addGroup(jPanel5Layout.createSequentialGroup()
+                        .addGap(24, 24, 24)
+                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel41)
+                            .addComponent(jTextCanPers, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGap(18, 18, 18)
+                .addComponent(jbcalcular)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel15)
                     .addComponent(jTextAlojamientoPaq, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -1055,7 +1101,7 @@ public class PanelAdmin2 extends javax.swing.JPanel {
                     .addComponent(jbSalirPaq)
                     .addComponent(jbLimpiarPaq)
                     .addComponent(jbSelecPaq))
-                .addContainerGap(79, Short.MAX_VALUE))
+                .addContainerGap(43, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Paquetes", jPanel5);
@@ -1858,9 +1904,33 @@ char c = evt.getKeyChar();
         
     }//GEN-LAST:event_jbSelecPaqActionPerformed
 
+    private void jbcalcularActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbcalcularActionPerformed
+        int selectedRow = jtPaquetes.getSelectedRow();
+        Object idTabla = modelo4.getValueAt(selectedRow, 0);
+        int canPer = Integer.parseInt(jTextCanPers.getText());
+        int idPaq = Integer.parseInt("" + idTabla);
+        Paquete paqnew = null;
+        double importetotal = 0.0;
+       
+        if (paqnew==null){
+            paqnew=pData.buscarPaquete(idPaq);
+        }
+        importetotal = pData.calcularPrecio(paqnew)*canPer;
+        jLImporte.setText("" + importetotal);
+    }//GEN-LAST:event_jbcalcularActionPerformed
+
+    private void jTextCanPersKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextCanPersKeyTyped
+        char c = evt.getKeyChar();
+
+        if (!(Character.isDigit(c) || c == '.' || c == ',' || c == KeyEvent.VK_BACK_SPACE || c == KeyEvent.VK_DELETE)) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_jTextCanPersKeyTyped
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JRadioButton botonEstadoCiudad;
+    private javax.swing.JLabel jLImporte;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -1895,6 +1965,8 @@ char c = evt.getKeyChar();
     private javax.swing.JLabel jLabel38;
     private javax.swing.JLabel jLabel39;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel40;
+    private javax.swing.JLabel jLabel41;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
@@ -1912,6 +1984,7 @@ char c = evt.getKeyChar();
     private javax.swing.JTextField jTIDciudadOrigen;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTextField jTextAlojamientoPaq;
+    private javax.swing.JTextField jTextCanPers;
     private javax.swing.JTextField jTextCiuDesPaq;
     private javax.swing.JTextField jTextCiuOrgPaq;
     private javax.swing.JTextField jTextCiudad;
@@ -1952,6 +2025,7 @@ char c = evt.getKeyChar();
     private javax.swing.JButton jbSelecPaq;
     private javax.swing.JButton jbSelecTran;
     private javax.swing.JButton jbSeleccionarDeTabla;
+    private javax.swing.JButton jbcalcular;
     private javax.swing.JTable jtAlojamientos;
     private javax.swing.JTable jtCiudades;
     private javax.swing.JTable jtPaquetes;
