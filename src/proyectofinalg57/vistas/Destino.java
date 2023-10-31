@@ -8,8 +8,12 @@ import finalgrupo57.AccesoADatos.CiudadData;
 import finalgrupo57.AccesoADatos.PasajeData;
 import finalgrupo57.Entidades.Pasaje;
 import java.awt.event.KeyEvent;
+import java.time.LocalDate;
+import java.time.Month;
+import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.JOptionPane;
 
 
 public class Destino extends javax.swing.JPanel {
@@ -18,18 +22,27 @@ public class Destino extends javax.swing.JPanel {
     private CiudadData cData;
     private List<Pasaje> listaT;
     private PasajeData tData;
+private int primerElemento;
+    private int idCiu;
+    private int idCiuD;
+    private String temporada;
 
-    
+    public Ciudad ciudadO;
+    public Ciudad ciudadD;
     public Destino() {
-        initComponents();
+
+
         cData = new CiudadData();
         listaC = cData.listarCiudad();
-        cargarCiudad();
-        tData = new PasajeData();
-        listaT = tData.listarPasajes();
-        cargarTransporte();
-    }
 
+        tData = new PasajeData();
+        listaT = tData.listarPasajesCiudad(idCiu);
+        initComponents();
+        cargarCiudad();
+       // cargarTransporte();
+        //System.out.println(idCiu);
+
+    }
    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -51,12 +64,12 @@ public class Destino extends javax.swing.JPanel {
         jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
         jtCantidadPasajeros = new javax.swing.JTextField();
-        jTextField2 = new javax.swing.JTextField();
-        jbGuardar = new javax.swing.JButton();
         cboxCiudadOrigen = new javax.swing.JComboBox<>();
         jDateChooser3 = new com.toedter.calendar.JDateChooser();
         jDateChooser4 = new com.toedter.calendar.JDateChooser();
         jButton1 = new javax.swing.JButton();
+        jLabel11 = new javax.swing.JLabel();
+        jLabel12 = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(255, 255, 255));
         setPreferredSize(new java.awt.Dimension(360, 540));
@@ -149,7 +162,7 @@ public class Destino extends javax.swing.JPanel {
                 .addComponent(jLabel9)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel10)
-                .addContainerGap(81, Short.MAX_VALUE))
+                .addContainerGap(101, Short.MAX_VALUE))
         );
 
         jtCantidadPasajeros.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -158,14 +171,11 @@ public class Destino extends javax.swing.JPanel {
             }
         });
 
-        jTextField2.setText("ALTAMEDIABAJA- Def");
-        jTextField2.addActionListener(new java.awt.event.ActionListener() {
+        cboxCiudadOrigen.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField2ActionPerformed(evt);
+                cboxCiudadOrigenActionPerformed(evt);
             }
         });
-
-        jbGuardar.setText("Guardar");
 
         jButton1.setText("Calcular");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -173,6 +183,10 @@ public class Destino extends javax.swing.JPanel {
                 jButton1ActionPerformed(evt);
             }
         });
+
+        jLabel11.setText("Temporada");
+
+        jLabel12.setText("0");
 
         javax.swing.GroupLayout jpDestinoLayout = new javax.swing.GroupLayout(jpDestino);
         jpDestino.setLayout(jpDestinoLayout);
@@ -182,14 +196,6 @@ public class Destino extends javax.swing.JPanel {
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jpDestinoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jpDestinoLayout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jButton1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jbGuardar)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jbSalir)
-                        .addContainerGap())
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpDestinoLayout.createSequentialGroup()
                         .addGroup(jpDestinoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(cboxCiudadOrigen, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -199,12 +205,21 @@ public class Destino extends javax.swing.JPanel {
                         .addGap(34, 34, 34))
                     .addGroup(jpDestinoLayout.createSequentialGroup()
                         .addGroup(jpDestinoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jpDestinoLayout.createSequentialGroup()
-                                .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, Short.MAX_VALUE))
                             .addComponent(jDateChooser4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jDateChooser3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(34, 34, 34))))
+                        .addGap(34, 34, 34))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpDestinoLayout.createSequentialGroup()
+                        .addGap(0, 18, Short.MAX_VALUE)
+                        .addComponent(jButton1)
+                        .addGap(91, 91, 91)
+                        .addComponent(jbSalir)
+                        .addContainerGap())
+                    .addGroup(jpDestinoLayout.createSequentialGroup()
+                        .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(jpDestinoLayout.createSequentialGroup()
+                        .addComponent(jLabel12)
+                        .addGap(0, 0, Short.MAX_VALUE))))
         );
         jpDestinoLayout.setVerticalGroup(
             jpDestinoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -217,15 +232,16 @@ public class Destino extends javax.swing.JPanel {
                 .addComponent(cboxTransporte, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jtCantidadPasajeros, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(61, 61, 61)
+                .addGap(77, 77, 77)
                 .addComponent(jDateChooser3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(18, 18, 18)
                 .addComponent(jDateChooser4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(39, 39, 39)
+                .addComponent(jLabel11)
+                .addGap(58, 58, 58)
+                .addComponent(jLabel12)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(136, 136, 136)
                 .addGroup(jpDestinoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jbGuardar)
                     .addComponent(jbSalir)
                     .addComponent(jButton1))
                 .addContainerGap())
@@ -249,16 +265,22 @@ public class Destino extends javax.swing.JPanel {
         this.setVisible(false);
     }//GEN-LAST:event_jbSalirActionPerformed
 
-    private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField2ActionPerformed
-
     private void cboxTransporteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboxTransporteActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_cboxTransporteActionPerformed
 
     private void cboxCiudadesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboxCiudadesActionPerformed
         // TODO add your handling code here:
+        String selecTodo = cboxCiudades.getSelectedItem().toString();
+        //\D+ busca solamente numeros usando expresiones regulares
+        String[] xi = selecTodo.split("\\D+");
+
+        int idCiuD = Integer.parseInt(xi[0]);
+
+
+        ciudadD= cData.buscarCiudadParaLista(idCiuD);
+
+        //System.out.println(ciudadD);
     }//GEN-LAST:event_cboxCiudadesActionPerformed
 
     private void jtCantidadPasajerosKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtCantidadPasajerosKeyTyped
@@ -270,7 +292,81 @@ public class Destino extends javax.swing.JPanel {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
+        try{
+          
+       
+      LocalDate fecha1 = jDateChooser3.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+    LocalDate fecha2 = jDateChooser4.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+   
+    int inicio = fecha1.getMonthValue();
+    int fin = fecha2.getMonthValue();
+
+    if ((inicio == Month.JANUARY.getValue() || inicio == Month.JULY.getValue()) &&
+        (fin == Month.JANUARY.getValue() || fin == Month.JULY.getValue())) {
+        jLabel11.setText("Alta");
+        temporada ="Alta";
+    } else if ((inicio == Month.FEBRUARY.getValue() || inicio == Month.JUNE.getValue()) &&
+               (fin == Month.FEBRUARY.getValue() || fin == Month.JUNE.getValue())) {
+        jLabel11.setText("Media");
+         temporada ="Media";
+    } else {
+        jLabel11.setText("Baja");
+         temporada ="Baja";
+    }
+        
+    
+      } catch (NullPointerException e) {
+            JOptionPane.showMessageDialog(null, "Tiene que seleccionar una fecha");
+    
+       
+      }
+        double precio=0;
+        
+        String seleccionCompletaT = cboxTransporte.getSelectedItem().toString();
+        String[] a = seleccionCompletaT.split("\\D+");
+        
+        double costoT = Integer.parseInt(a[1]);
+        
+        try{
+        int cantP = Integer.parseInt(jtCantidadPasajeros.getText());
+        
+        if (temporada.equals("Alta")) {
+            precio = (costoT * cantP) * 1.30;
+        } else if (temporada.equals("Media")) {
+            precio = (costoT * cantP) * 1.15;
+        } else {
+
+           precio = (costoT * cantP);
+
+        }
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(null, "Tiene que ingresar una cantidad de pasajeros");
+    
+       
+      }
+        jLabel12.setText(String.valueOf(precio));
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void cboxCiudadOrigenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboxCiudadOrigenActionPerformed
+        // TODO add your handling code here:
+        cboxTransporte.removeAllItems();
+//        System.out.println(listaT);
+        String seleccionCompleta = cboxCiudadOrigen.getSelectedItem().toString();
+        //\\D+ busca solamente numeros usando expresiones regulares
+        String[] x = seleccionCompleta.split("\\D+");
+        
+        int idCiu = Integer.parseInt(x[0]);
+        
+        System.out.println( "idCiudad " +idCiu );
+        listaT = tData.listarPasajesCiudad(idCiu);
+        
+        for (Pasaje item : listaT) {
+                
+          cboxTransporte.addItem(item);
+        }
+       
+        ciudadO= cData.buscarCiudadParaLista(idCiu);
+    }//GEN-LAST:event_cboxCiudadOrigenActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -282,6 +378,8 @@ public class Destino extends javax.swing.JPanel {
     private com.toedter.calendar.JDateChooser jDateChooser4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -291,25 +389,23 @@ public class Destino extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JButton jbGuardar;
     private javax.swing.JButton jbSalir;
     private javax.swing.JPanel jpDestino;
     private javax.swing.JTextField jtCantidadPasajeros;
     // End of variables declaration//GEN-END:variables
 
     private void cargarCiudad() {
-        for(Ciudad item: listaC){
-     //recorre la lista y se lo setea al checkbox
-        cboxCiudades.addItem(item);
-        cboxCiudadOrigen.addItem(item);
-        
+        for (Ciudad item : listaC) {
+            //recorre la lista y se lo setea al checkbox
+            cboxCiudades.addItem(item);
+            cboxCiudadOrigen.addItem(item);
+
         }
     }
 
-    private void cargarTransporte() {
-        for (Pasaje item: listaT){
-            cboxTransporte.addItem(item);
-        }
-    }
+//    private void cargarTransporte() {
+//        for (Pasaje item: listaT){
+//            cboxTransporte.addItem(item);
+//        }
+//    }
 }

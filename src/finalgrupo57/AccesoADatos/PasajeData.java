@@ -190,5 +190,38 @@ public class PasajeData {
     
     
     }
+    public List<Pasaje>listarPasajesCiudad(int id){
+    
+    String sql = "SELECT idPasaje, tipoTransporte, importe, nombreCiudadOrigen, estado FROM pasaje WHERE nombreCiudadOrigen =? AND estado = 1";
+    
+    CiudadData cD = new CiudadData();
+    ArrayList<Pasaje> pasajes = new ArrayList<>();
+        try {
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setInt(1, id);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()){
+                Pasaje pasaje = new Pasaje();
+                
+                
+                pasaje.setIdPasaje(rs.getInt("idPasaje"));
+                pasaje.setImporte(rs.getDouble("importe"));
+                pasaje.setTipoTransporte(rs.getString("tipoTransporte"));
+                pasaje.setNombreCiudadOrigen(cD.buscarCiudadParaLista(rs.getInt("nombreCiudadOrigen")));
+                pasaje.setEstado(rs.getBoolean("estado"));
+               pasajes.add(pasaje);
+
+            } 
+
+            ps.close();
+
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "No se encontro ninguna ciudad en la lista");
+        }
+        return pasajes;
+    
+    
+    
+    }
     
 }
